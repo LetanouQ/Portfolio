@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cycles gaz et combinés | Quentin Le Tanou</title>
+    <meta name="description" content="Modélisation sous EBSILON de turbines à gaz, cycles combinés et cogénération.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Du cycle Brayton au cycle combiné -->
+      <section class="hero">
+        <h1>Du cycle Brayton au cycle combiné</h1>
+        <div class="intro">
+          <p>
+            Dans le cadre du cours Heat and Power Systems Engineering à Chalmers en 2026, j’ai
+            réalisé sous EBSILON Professional les modèles présentés ici et leurs analyses de
+            sensibilité. L’étude part d’une turbine à gaz, puis ajoute un cycle vapeur de
+            récupération, un préchauffage régénératif et une production de chaleur. Les
+            configurations s’appuient sur un modèle pédagogique inspiré de la centrale de Rya.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Cycle simple et rapport de compression -->
+      <section class="project-section">
+        <h2>Cycle simple et rapport de compression</h2>
+        <p>
+          Le cycle ouvert associe un compresseur, une chambre de combustion et une turbine
+          entraînant le compresseur et l’alternateur. La température d’entrée turbine est fixée à 1
+          200 °C. Une partie importante du travail de détente est consommée par la compression de
+          l’air.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/simple.png" aria-label="Agrandir : Modèle de turbine à gaz sous EBSILON">
+            <img src="assets/simple.png" alt="Modèle de turbine à gaz sous EBSILON" loading="lazy">
+          </button>
+          <figcaption>
+            Cycle Brayton simple, rendements isentropiques du compresseur et de la turbine de 0,8,
+            rendement électrique de 22,5 %
+          </figcaption>
+        </figure>
+        <p>
+          Le rapport de compression a été varié de 5 à 40, pour un débit d’air de 390 kg/s et une
+          pression de sortie turbine de 1,2 bar. Deux cas sont comparés : des rendements
+          isentropiques égaux à 1 pour le compresseur et la turbine, puis égaux à 0,8.
+        </p>
+        <div class="pair">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/compression.svg" aria-label="Agrandir : Rendement électrique pour deux rendements isentropiques">
+              <img src="assets/compression.svg" alt="Rendement électrique pour deux rendements isentropiques" loading="lazy">
+            </button>
+            <figcaption>Influence du rapport de compression sur le rendement</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/puissance.svg" aria-label="Agrandir : Puissance électrique pour deux rendements isentropiques">
+              <img src="assets/puissance.svg" alt="Puissance électrique pour deux rendements isentropiques" loading="lazy">
+            </button>
+            <figcaption>Influence du rapport de compression sur la puissance</figcaption>
+          </figure>
+        </div>
+        <p>
+          Avec des transformations isentropiques, le rendement augmente sur la plage étudiée, tandis
+          que la puissance atteint un maximum parmi les points testés à un rapport de 20. Avec des
+          rendements isentropiques de 0,8, le meilleur rendement testé est de 22,4 % à un rapport de
+          15, mais la puissance maximale est obtenue à un rapport de 10, avec environ 88,0 MW.
+        </p>
+        <p>
+          Le rapport de compression qui maximise la puissance n’est donc pas nécessairement celui
+          qui maximise le rendement. Lorsque les pertes sont prises en compte, le travail
+          supplémentaire demandé au compresseur pénalise fortement le bilan aux rapports élevés.
+        </p>
+      </section>
+      <!-- SECTION : Cycle combiné et postcombustion -->
+      <section class="project-section">
+        <h2>Cycle combiné et postcombustion</h2>
+        <p>
+          Les gaz en sortie de turbine alimentent une chaudière de récupération, composée d’un
+          économiseur, d’un évaporateur et d’un surchauffeur. La vapeur produite entraîne une
+          seconde turbine. Une postcombustion en amont de la chaudière permet d’augmenter l’énergie
+          disponible pour le cycle vapeur.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/combine.png" aria-label="Agrandir : Cycle combiné gaz vapeur avec postcombustion">
+            <img src="assets/combine.png" alt="Cycle combiné gaz vapeur avec postcombustion" loading="lazy">
+          </button>
+          <figcaption>Modèle 2 - Cycle combiné avec chaudière de récupération</figcaption>
+        </figure>
+        <p>
+          Dans l’étude de sensibilité, porter la température après postcombustion de 600 à 1 000 °C
+          fait passer la puissance électrique de 198,3 à 312,2 MW. Le rendement électrique sur PCI
+          augmente plus modérément, de 49,76 à 51,18 %. Cette évolution est propre à la
+          configuration et aux conditions imposées dans ce modèle.
+        </p>
+        <p>
+          La postcombustion permet aussi de respecter la consigne de vapeur surchauffée à 545 °C.
+          Sans elle, les gaz sortant de la turbine à 538 °C ne peuvent pas chauffer la vapeur à
+          cette température. Il faut alors abaisser la consigne de vapeur et adapter le
+          fonctionnement du cycle de récupération.
+        </p>
+        <details>
+          <summary>Tableau des résultats de postcombustion</summary>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Température (°C)</th>
+                  <th>Puissance (MW)</th>
+                  <th>Rendement PCI (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>600</td>
+                  <td>198.3</td>
+                  <td>49.76</td>
+                </tr>
+                <tr>
+                  <td>700</td>
+                  <td>225.3</td>
+                  <td>50.22</td>
+                </tr>
+                <tr>
+                  <td>800</td>
+                  <td>253.3</td>
+                  <td>50.59</td>
+                </tr>
+                <tr>
+                  <td>900</td>
+                  <td>282.2</td>
+                  <td>50.91</td>
+                </tr>
+                <tr>
+                  <td>1000</td>
+                  <td>312.2</td>
+                  <td>51.18</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+      <!-- SECTION : Préchauffage régénératif basse pression -->
+      <section class="project-section">
+        <h2>Préchauffage régénératif basse pression</h2>
+        <p>
+          Une modification du cycle combiné consiste à ajouter un soutirage basse pression et un
+          réchauffeur fermé en amont du dégazeur. L’objectif est de répartir le préchauffage de
+          l’eau en utilisant de la vapeur ayant déjà effectué une détente plus importante.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/modifie.png" aria-label="Agrandir : Cycle combiné avec réchauffeur basse pression supplémentaire">
+            <img src="assets/modifie.png" alt="Cycle combiné avec réchauffeur basse pression supplémentaire" loading="lazy">
+          </button>
+          <figcaption>Modèle 3 - Ajout d’un préchauffage régénératif basse pression</figcaption>
+        </figure>
+        <p>
+          La température d’eau après ce réchauffeur varie de 30 à 90 °C. Le meilleur point testé est
+          obtenu à 57 °C : le rendement passe de 51,049 % pour la référence à 51,312 %, soit un gain
+          d’environ 0,264 point, ou 0,52 % en relatif.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/prechauffage.svg" aria-label="Agrandir : Rendement électrique en fonction de la température de préchauffage">
+            <img src="assets/prechauffage.svg" alt="Rendement électrique en fonction de la température de préchauffage" loading="lazy">
+          </button>
+          <figcaption>Comparaison du cycle modifié à la configuration de référence</figcaption>
+        </figure>
+        <p>
+          Le gain reste limité et ne suffit pas, à lui seul, à justifier l’ajout des équipements.
+          L’intérêt de la modification dépendrait aussi du coût du réchauffeur, des auxiliaires et
+          de la durée annuelle de fonctionnement. L’étude permet ici d’identifier une plage
+          favorable parmi les températures testées.
+        </p>
+        <p class="technical">
+          Les rendements sont exprimés sur le pouvoir calorifique inférieur du combustible.
+        </p>
+      </section>
+      <!-- SECTION : Cogénération -->
+      <section class="project-section">
+        <h2>Cogénération</h2>
+        <p>
+          La configuration de cogénération récupère de la chaleur sur les fumées et par soutirage de
+          vapeur. Le réseau de chauffage est alimenté à 90 °C, avec un retour à 40 °C. Le modèle
+          conserve un condenseur refroidi par eau et représente une simplification de l’installation
+          réelle.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/cogeneration.png" aria-label="Agrandir : Cycle combiné avec réseau de chaleur">
+            <img src="assets/cogeneration.png" alt="Cycle combiné avec réseau de chaleur" loading="lazy">
+          </button>
+          <figcaption>
+            Modèle 4 - Cogénération , capture à une demande de chaleur de 250 MW
+          </figcaption>
+        </figure>
+        <p>
+          Lorsque la demande de chaleur passe de 50 à 294 MW, le rendement électrique sur PCI
+          diminue de 50,06 à 43,69 %, tandis que le rendement global, électricité et chaleur utile
+          comprises, augmente de 58,70 à 94,50 %. La production de chaleur valorise davantage
+          l’énergie du combustible, mais réduit la détente disponible pour produire de
+          l’électricité.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/chaleur.svg" aria-label="Agrandir : Rendements électrique et global en fonction de la demande de chaleur">
+            <img src="assets/chaleur.svg" alt="Rendements électrique et global en fonction de la demande de chaleur" loading="lazy">
+          </button>
+          <figcaption>
+            Cogénération - Rendements calculés sur le pouvoir calorifique inférieur du combustible
+          </figcaption>
+        </figure>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>

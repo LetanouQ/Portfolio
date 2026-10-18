@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cycles vapeur | Quentin Le Tanou</title>
+    <meta name="description" content="Modélisation de cycles Rankine sous EBSILON et analyse de sensibilité de leurs performances.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Du cycle Rankine simple à la centrale à vapeur -->
+      <section class="hero">
+        <h1>Du cycle Rankine simple à la centrale à vapeur</h1>
+        <div class="intro">
+          <p>
+            Dans le cadre du cours <i>Heat and Power Systems Engineering</i> à Chalmers en 2026,
+            j’ai réalisé sous EBSILON Professional une série de modèles de centrales à vapeur et
+            analysé leurs performances. Quatre configurations illustrent ici la progression : cycle
+            simple, régénération par soutirage, architecture supercritique et cogénération. Une
+            étude de sensibilité à la pression de vapeur complète l’analyse de cette dernière
+            configuration.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Présentation -->
+      <section id="modeles">
+        <div class="section-head">
+          <h2>Quatre configurations étudiées, de la plus simple à la plus complexe</h2>
+          <p>
+            Ces modèles correspondent à des installations et des conditions différentes. Les
+            rendements ne mesurent donc pas l’effet isolé d’une seule modification.
+          </p>
+        </div>
+        <article class="model">
+          <div class="model-text">
+            <h3>Cycle Rankine simple</h3>
+            <p>
+              L’eau est mise sous pression, chauffée dans le générateur de vapeur, puis détendue
+              dans une turbine entraînant un alternateur. Le condenseur ferme le cycle.
+            </p>
+            <p>
+              Cette première configuration sert de référence pour identifier les flux de chaleur et
+              de travail.
+            </p>
+            <div class="metric">
+              15,3 %
+              <span>Rendement électrique</span>
+            </div>
+          </div>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Model1.png" aria-label="Agrandir le modèle 1">
+              <img src="assets/Model1.png" alt="Cycle simple : générateur de vapeur, turbine, alternateur, condenseur et pompe">
+            </button>
+            <figcaption>Cycle Rankine simple</figcaption>
+          </figure>
+        </article>
+        <article class="model">
+          <div class="model-text">
+            <h3>Régénération par soutirage</h3>
+            <p>
+              Une partie de la vapeur est soutirée pendant la détente pour préchauffer l’eau
+              d’alimentation, dans un réchauffeur et un dégazeur.
+            </p>
+            <p>
+              Cette récupération interne réduit la chaleur à apporter au générateur de vapeur, mais
+              diminue aussi le débit poursuivant la détente. L’intérêt se juge sur le bilan du
+              cycle.
+            </p>
+            <div class="metric">
+              20,0 %
+              <span>Rendement électrique</span>
+            </div>
+          </div>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Model2.png" aria-label="Agrandir le modèle 2">
+              <img src="assets/Model2.png" alt="Cycle régénératif avec soutirages vers le dégazeur DEA et le réchauffeur FWH" loading="lazy">
+            </button>
+            <figcaption>Préchauffage de l’eau d’alimentation</figcaption>
+          </figure>
+        </article>
+        <article class="advanced">
+          <div>
+            <h3>Cycle supercritique avec resurchauffe</h3>
+            <p>
+              Le modèle inspiré de Nordjylland combine des conditions de vapeur élevées, une
+              resurchauffe et plusieurs niveaux de soutirage. Le réseau de réchauffeurs permet un
+              préchauffage progressif de l’eau d’alimentation.
+            </p>
+            <p>
+              Cette représentation pédagogique comporte une seule resurchauffe. Elle permet
+              d’étudier le couplage entre les étages de détente et le circuit d’alimentation en eau.
+            </p>
+          </div>
+          <div class="metric">
+            49,4 %
+            <span>Rendement électrique</span>
+          </div>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Model5.png" aria-label="Agrandir le modèle 3">
+              <img src="assets/Model5.png" alt="Modèle supercritique avec train de turbines et réseau de réchauffeurs régénératifs" loading="lazy">
+            </button>
+            <figcaption>Vue d’ensemble du cycle et du réseau de préchauffage</figcaption>
+          </figure>
+        </article>
+        <article class="advanced cogen">
+          <div>
+            <h3>Cogénération</h3>
+            <p>
+              Deux échangeurs alimentés par des soutirages vapeur ajoutent une production de chaleur
+              pour un réseau de chauffage à la configuration précédente.
+            </p>
+            <p>
+              Une partie de la vapeur contribue ainsi à la fourniture de chaleur utile plutôt qu’à
+              la seule production électrique. Le rendement électrique passe d’environ 49,4 % à 44,1
+              %, tandis que le rendement global, électricité et chaleur utile comprises, atteint
+              environ 75,3 %.
+            </p>
+            <p>
+              La cogénération améliore donc la valorisation globale de l’énergie, à condition de
+              disposer d’un besoin de chaleur adapté. C’est sur cette configuration de cogénération
+              que porte l’étude paramétrique ci-dessous.
+            </p>
+          </div>
+          <div class="metric">
+            75,3 %
+            <span>Rendement global<br>(électricité et chaleur)</span>
+            <div class="secondary-metric">
+              44,1 %
+              <span>Rendement électrique</span>
+            </div>
+          </div>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Model6.png" aria-label="Agrandir le modèle 4">
+              <img src="assets/Model6.png" alt="Modèle 4 avec échangeurs de chauffage urbain" loading="lazy">
+            </button>
+            <figcaption>
+              Deux échangeurs alimentent le réseau de chaleur à partir de soutirages vapeur
+            </figcaption>
+          </figure>
+        </article>
+      </section>
+      <!-- SECTION : Présentation -->
+      <section id="analyse">
+        <div class="section-head">
+          <h2>Impact d’une variation de la pression de vapeur</h2>
+          <p>
+            L’analyse porte sur le cycle avec cogénération. Elle évalue l’effet de la pression de
+            vapeur vive sur le rendement et la puissance électrique nette, pour une fourniture de
+            chaleur fixée à 250 MW.
+          </p>
+        </div>
+        <p>
+          La pression de vapeur varie de 270 à 300 bar. Les températures sont fixées à 582 °C en
+          sortie du générateur et à 580 °C après resurchauffe. La condensation s’effectue autour de
+          20 °C et la chaleur utile fournie au réseau est maintenue à 250 MW.
+        </p>
+        <p>
+          La pression de vapeur vive varie à conditions imposées inchangées. La puissance électrique
+          est calculée après déduction de la consommation des pompes prise en compte dans le modèle.
+        </p>
+        <div class="charts">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <img src="assets/rendement.svg" alt="Le rendement électrique net augmente de 43,976 à 44,191 pour cent entre 270 et 300 bar">
+            <figcaption>
+              Un gain de rendement positif, dont la pente diminue sur la plage étudiée
+            </figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <img src="assets/puissance.svg" alt="La puissance électrique nette augmente de 351,19 à 354,52 MW entre 270 et 300 bar">
+            <figcaption>Puissance électrique nette</figcaption>
+          </figure>
+        </div>
+        <div class="result">
+          <p>
+            Entre 270 et 300 bar, le rendement électrique net passe de 43,976 % à 44,191 %. La
+            puissance nette augmente de 3,33 MW, soit environ 0,95 %.
+          </p>
+        </div>
+        <p>
+          Dans les conditions étudiées, augmenter la pression améliore les performances, mais le
+          gain reste modéré. Cette analyse quantifie un levier thermodynamique ; elle ne suffit pas
+          à déterminer un optimum technico-économique, qui demanderait notamment d’intégrer les
+          contraintes mécaniques et le coût des équipements.
+        </p>
+        <details>
+          <summary>Diagramme température-entropie</summary>
+          <p>
+            À température de vapeur vive fixée, le passage de 270 à 300 bar déplace l’entrée de la
+            turbine vers une entropie plus faible. Les trajectoires diffèrent surtout pendant le
+            chauffage à haute pression et la première détente ; elles se rejoignent après la
+            resurchauffe, dont les conditions de sortie sont imposées.
+          </p>
+          <p>
+            Le rendement augmente sur la plage étudiée, mais le gain diminue à mesure que la
+            pression s’élève. Le rapprochement des isobares à haute pression permet d’interpréter
+            qualitativement cette tendance, également observée dans les bilans du cycle.
+          </p>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Diagrams.png" aria-label="Agrandir la comparaison des diagrammes à 270 et 300 bar">
+              <img src="assets/Diagrams.png" alt="Diagrammes température-entropie superposés : 270 bar en violet et 300 bar en vert" loading="lazy">
+            </button>
+            <figcaption>Comparaison à 270 bar (violet) et 300 bar (vert)</figcaption>
+          </figure>
+        </details>
+        <details>
+          <summary>Tableau des résultats du cycle avec cogénération</summary>
+          <p>
+            Le rendement électrique net est le rapport entre la puissance électrique nette et le
+            flux thermique fourni au cycle, tels qu’exportés du modèle. Le rendement global inclut
+            également les 250 MW de chaleur utile. Le périmètre est celui du modèle thermodynamique,
+            sans extrapolation au rendement d’une installation réelle complète.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Pression (bar)</th>
+                  <th>Rendement net (%)</th>
+                  <th>Puissance nette (MW)</th>
+                  <th>Apport thermique (MW)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>270</td>
+                  <td>43.976</td>
+                  <td>351.19</td>
+                  <td>798.59</td>
+                </tr>
+                <tr>
+                  <td>275</td>
+                  <td>44.018</td>
+                  <td>351.83</td>
+                  <td>799.29</td>
+                </tr>
+                <tr>
+                  <td>280</td>
+                  <td>44.057</td>
+                  <td>352.44</td>
+                  <td>799.95</td>
+                </tr>
+                <tr>
+                  <td>285</td>
+                  <td>44.094</td>
+                  <td>353.01</td>
+                  <td>800.57</td>
+                </tr>
+                <tr>
+                  <td>290</td>
+                  <td>44.129</td>
+                  <td>353.54</td>
+                  <td>801.16</td>
+                </tr>
+                <tr>
+                  <td>295</td>
+                  <td>44.161</td>
+                  <td>354.05</td>
+                  <td>801.72</td>
+                </tr>
+                <tr>
+                  <td>300</td>
+                  <td>44.191</td>
+                  <td>354.52</td>
+                  <td>802.24</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>

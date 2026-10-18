@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Instrumentation d’une soufflerie | Quentin Le Tanou</title>
+    <meta name="description" content="Conception d’un système de mesure de débit au LEGI : pression différentielle, étalonnage expérimental et acquisition sur ESP32.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Mesure du débit d’une soufflerie -->
+      <section class="hero">
+        <h1>Mesure du débit d’une soufflerie</h1>
+        <div class="intro">
+          <p>
+            Lors de mon stage au LEGI, en avril et mai 2025, j’ai travaillé à la conception et à
+            l’installation d’un système de mesure pour une soufflerie à faible niveau de turbulence.
+            L’objectif était de fournir une estimation continue du débit et de la vitesse au centre
+            de la veine d’essai, sans introduire de sonde dans l’écoulement. Le dispositif a pour
+            objectif de faciliter les réglages courants sur une plage de 4 à 30 m/s.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Mesure par pression différentielle -->
+      <section class="project-section">
+        <h2>Mesure par pression différentielle</h2>
+        <p>
+          Le principe repose sur deux prises de pression statique situées dans le convergent. La
+          réduction de section accélère l’air et s’accompagne d’une baisse de pression. En combinant
+          la conservation du débit et la relation de Bernoulli, on obtient, dans le modèle idéal,
+          une dépendance du débit à la racine carrée de la différence de pression.
+        </p>
+        <div class="equation">
+          Q ∝ √Δp
+        </div>
+        <p>
+          Δp désigne ici la différence de pression positive entre l’amont et l’aval du convergent.
+          Le modèle suppose un écoulement incompressible et permanent, avec des pertes négligées. Il
+          donne la forme de la relation à rechercher, mais l’étalonnage doit tenir compte de
+          l’écoulement réel.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="" class="measurement-diagram">
+          <button class="zoom" data-image="assets/principe.png" aria-label="Agrandir : Position des prises de pression dans le convergent">
+            <img src="assets/principe.png" alt="Position des prises de pression dans le convergent" loading="lazy">
+          </button>
+          <figcaption>Principe de mesure par pression différentielle</figcaption>
+        </figure>
+        <details>
+          <summary>Voir l’installation</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="photo-wide">
+            <button class="zoom" data-image="assets/soufflerie.jpg" aria-label="Agrandir : Vue de la soufflerie du LEGI">
+              <img src="assets/soufflerie.jpg" alt="Vue de la soufflerie du LEGI" loading="lazy">
+            </button>
+            <figcaption>Soufflerie à faible niveau de turbulence du LEGI</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/veine-essai.jpg" aria-label="Agrandir : Veine d’essai de la soufflerie">
+              <img src="assets/veine-essai.jpg" alt="Veine d’essai de la soufflerie" loading="lazy">
+            </button>
+            <figcaption>Veine d’essai de la soufflerie</figcaption>
+          </figure>
+        </details>
+      </section>
+      <!-- SECTION : Étalonnage et correction des couches limites -->
+      <section class="project-section">
+        <h2>Étalonnage et correction des couches limites</h2>
+        <p>
+          La vitesse au centre de la veine est mesurée avec un tube de Pitot, tandis qu’un second
+          manomètre relève la différence de pression dans le convergent. Les mesures permettent
+          d’ajuster une loi de puissance :
+        </p>
+        <div class="equation">
+          u
+          <sub>c</sub>
+          = a (Δp)
+          <sup>b</sup>
+          , avec a = 2,2344 et b = 0,4840
+        </div>
+        <p>
+          Ces coefficients correspondent à une pression exprimée en Pa et une vitesse en m/s.
+          L’exposant est proche de 0,5, en accord avec la tendance issue de Bernoulli. Le
+          coefficient de détermination vaut R² = 0,99996 pour les points d’étalonnage ; la
+          vérification du dispositif final fait ensuite l’objet d’une comparaison distincte.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="">
+          <button class="zoom" data-image="assets/etalonnage.png" aria-label="Agrandir : Mesures de vitesse et ajustement en loi de puissance">
+            <img src="assets/etalonnage.png" alt="Mesures de vitesse et ajustement en loi de puissance" loading="lazy">
+          </button>
+          <figcaption>Étalonnage - Mesures et loi ajustée</figcaption>
+        </figure>
+        <p>
+          La vitesse au centre n’est pas la vitesse moyenne sur toute la section : les couches
+          limites ralentissent l’écoulement près des parois. Des profils mesurés au fil chaud
+          permettent d’estimer les épaisseurs de déplacement, puis une section débitante équivalente
+          S<sub>d</sub>. Le débit est alors calculé par Q = S<sub>d</sub> u<sub>c</sub>, avec
+          S<sub>d</sub> ≈ 0,526 m² à la position de référence.
+        </p>
+        <details>
+          <summary>Voir la section débitante</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="geometry">
+            <button class="zoom" data-image="assets/section.png" aria-label="Agrandir : Section de la veine et épaisseur de déplacement">
+              <img src="assets/section.png" alt="Section de la veine et épaisseur de déplacement" loading="lazy">
+            </button>
+            <figcaption>
+              Prise en compte des couches limites dans la section de la veine
+            </figcaption>
+          </figure>
+        </details>
+      </section>
+      <!-- SECTION : Système embarqué et acquisition -->
+      <section class="project-section">
+        <h2>Système embarqué et acquisition</h2>
+        <p>
+          Le montage associe un capteur de pression différentielle Sensirion SDP810-500Pa à une
+          carte Arduino Nano ESP32. Un module MS5607 mesure également la pression et la température
+          ambiantes. Les composants communiquent par bus I²C et sont assemblés sur une platine
+          d’essai, dans un boîtier imprimé en 3D.
+        </p>
+        <div class="pair photos">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/boitier-interieur.jpg" aria-label="Agrandir : Intérieur du boîtier et raccordement du capteur">
+              <img src="assets/boitier-interieur.jpg" alt="Intérieur du boîtier et raccordement du capteur" loading="lazy">
+            </button>
+            <figcaption>Intérieur du boîtier et raccordement du capteur</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/breadboard-horizontal.jpg" aria-label="Agrandir : Montage sur platine d’essai">
+              <img src="assets/breadboard-horizontal.jpg" alt="Montage sur platine d’essai" loading="lazy">
+            </button>
+            <figcaption>Montage sur platine d’essai</figcaption>
+          </figure>
+        </div>
+        <p>
+          L’acquisition est effectuée à 40 Hz. Une moyenne exponentielle, dont la durée
+          caractéristique est réglable, filtre la pression avant le calcul de la vitesse et du
+          débit. Le microcontrôleur calcule également les incertitudes associées.
+        </p>
+        <p>
+          Une interface accessible en Wi-Fi affiche les mesures et permet de régler le filtrage ou
+          de refaire le zéro du capteur. Les données sont aussi disponibles au format JSON ; une
+          seconde carte les transmet par liaison série à l’ordinateur du laboratoire pour leur
+          exploitation sous LabVIEW.
+        </p>
+        <details>
+          <summary>Voir l’interface du dispositif</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="interface">
+            <button class="zoom" data-image="assets/interface.png" aria-label="Agrandir : Interface de mesure avec réglage du filtrage et du zéro">
+              <img src="assets/interface.png" alt="Interface de mesure avec réglage du filtrage et du zéro" loading="lazy">
+            </button>
+            <figcaption>Interface réalisée pendant le stage</figcaption>
+          </figure>
+        </details>
+      </section>
+      <!-- SECTION : Incertitudes et comparaison au tube de Pitot -->
+      <section class="project-section">
+        <h2>Incertitudes et comparaison au tube de Pitot</h2>
+        <p>
+          Les incertitudes sur les coefficients de l’ajustement sont estimées par Monte-Carlo, en
+          perturbant les grandeurs mesurées puis en répétant la régression. Elles sont ensuite
+          propagées à la vitesse et au débit, avec celles du capteur de pression et de la section
+          débitante.
+        </p>
+        <p>
+          Le calcul donne une incertitude relative sur le débit de l’ordre de 2 à 2,5 % entre 4 et
+          30 m/s, dans les conditions de faible turbulence étudiées. Cette estimation dépend des
+          hypothèses de propagation retenues, notamment l’indépendance des paramètres ; elle ne
+          constitue pas une borne d’erreur garantie.
+        </p>
+        <details>
+          <summary>Voir l’incertitude relative estimée</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/incertitude.png" aria-label="Agrandir : Incertitude relative estimée sur le débit en fonction de la vitesse">
+              <img src="assets/incertitude.png" alt="Incertitude relative estimée sur le débit en fonction de la vitesse" loading="lazy">
+            </button>
+            <figcaption>Plage d’utilisation visée : 4 à 30 m/s</figcaption>
+          </figure>
+        </details>
+        <p>
+          Le système assemblé est comparé au tube de Pitot sur la vitesse au centre de la veine. Les
+          mesures suivent la droite d’identité et les écarts sont compatibles avec les barres
+          d’incertitude représentées. Cette comparaison vérifie l’estimation de vitesse ; le débit
+          repose en complément sur l’évaluation de la section débitante.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="validation">
+          <button class="zoom" data-image="assets/validation.png" aria-label="Agrandir : Comparaison de la vitesse mesurée par le dispositif avec celle du tube de Pitot">
+            <img src="assets/validation.png" alt="Comparaison de la vitesse mesurée par le dispositif avec celle du tube de Pitot" loading="lazy">
+          </button>
+          <figcaption>Comparaison au Pitot à faible turbulence</figcaption>
+        </figure>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>

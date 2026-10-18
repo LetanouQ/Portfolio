@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Rotor de turbine | Quentin Le Tanou</title>
+    <meta name="description" content="Analyse du pas d’une grille d’aubes de turbine : calcul analytique, CFD sous STAR-CCM+ et comparaison des pertes.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Étude aérodynamique d’un rotor de turbine -->
+      <section class="hero">
+        <h1>Étude aérodynamique d’un rotor de turbine</h1>
+        <div class="intro">
+          <p>
+            Ce projet, réalisé dans le cadre du cours de turbomachines à Chalmers en 2026, étudie
+            l’influence du pas inter-aubes sur les pertes d’un rotor de turbine. Une analyse
+            préliminaire de l’étage définit les conditions d’entrée et une première estimation du
+            pas. Six simulations CFD sous STAR-CCM+, sur une coupe bidimensionnelle du rotor, sont
+            ensuite comparées à la corrélation d’Ainley-Mathieson.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Conditions d’entrée -->
+      <section class="project-section">
+        <h2>Conditions d’entrée</h2>
+        <p>
+          Le rotor appartient à un étage à réaction nulle. L’analyse repose sur les triangles de
+          vitesses et les relations thermodynamiques, en supposant l’air parfait et les pertes du
+          distributeur négligeables. Elle donne un angle d’entrée relatif de 52,93°, une température
+          statique de 994,8 K et une pression totale relative de 448,9 kPa.
+        </p>
+        <p>
+          Le paramètre étudié est le rapport s/b, où s désigne le pas inter-aubes, c’est-à-dire la
+          distance entre deux points homologues d’aubes voisines, et b la corde axiale, fixée à 33
+          mm. Pour les profils utilisés, la corde et la corde axiale sont égales. Le critère de
+          Zweifel, avec un coefficient de charge de 0,8, donne une première estimation de s/b =
+          0,416, soit un pas de 13,7 mm.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="geometry">
+          <button class="zoom" data-image="assets/blade.png" aria-label="Agrandir : Géométrie de la grille pour s/b = 0,45">
+            <img src="assets/blade.png" alt="Géométrie de la grille pour s/b = 0,45" loading="lazy">
+          </button>
+          <figcaption>Géométrie pour s/b = 0,45, générée à partir d’un script MATLAB</figcaption>
+        </figure>
+      </section>
+      <!-- SECTION : Modélisation sous STAR-CCM+ -->
+      <section class="project-section">
+        <h2>Modélisation sous STAR-CCM+</h2>
+        <p>
+          Le domaine représente un passage inter-aubes bidimensionnel, avec une périodicité par
+          translation. Les calculs sont réalisés en RANS stationnaire compressible, avec le modèle
+          de turbulence Spalart-Allmaras et une viscosité suivant la loi de Sutherland. Les parois
+          sont adiabatiques et sans glissement.
+        </p>
+        <p>
+          Les composantes de vitesse relative et la température statique sont imposées à l’entrée.
+          La pression statique de sortie est ajustée pour retrouver la pression totale relative
+          calculée lors de l’analyse préliminaire. Cette procédure est appliquée aux six rapports
+          s/b : 0,30 ; 0,35 ; 0,40 ; 0,45 ; 0,50 et 0,60.
+        </p>
+        <details>
+          <summary>Voir le maillage</summary>
+          <p>
+            Le maillage est polygonal, avec des couches prismatiques près des aubes. Les résidus
+            décroissent puis se stabilisent, avec de faibles oscillations pour les pas les plus
+            élevés.
+          </p>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/mesh045.png" aria-label="Agrandir : Maillage du passage inter-aubes à s/b = 0,45">
+              <img src="assets/mesh045.png" alt="Maillage du passage inter-aubes à s/b = 0,45" loading="lazy">
+            </button>
+            <figcaption>Maillage pour s/b = 0,45</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/boundary_layer_mesh.png" aria-label="Agrandir : Détail des couches prismatiques au voisinage de l’aube">
+              <img src="assets/boundary_layer_mesh.png" alt="Détail des couches prismatiques au voisinage de l’aube" loading="lazy">
+            </button>
+            <figcaption>Détail des couches prismatiques au voisinage de l’aube</figcaption>
+          </figure>
+        </details>
+      </section>
+      <!-- SECTION : Coefficient de perte de pression -->
+      <section class="project-section">
+        <h2>Coefficient de perte de pression</h2>
+        <p>
+          Le coefficient de perte de pression totale est calculé à partir des pressions moyennées
+          par le débit massique, dans le repère relatif du rotor :
+        </p>
+        <div class="equation" aria-label="Y P égale p zéro deux relatif moins p zéro trois relatif, divisé par p zéro deux relatif moins p trois">
+          Y
+          <sub>P</sub>
+          = (p
+          <sub>02,rel</sub>
+          − p
+          <sub>03,rel</sub>
+          ) / (p
+          <sub>02,rel</sub>
+          − p
+          <sub>3</sub>
+          )
+        </div>
+        <p>
+          La CFD et la corrélation d’Ainley-Mathieson présentent la même tendance : les pertes
+          diminuent d’abord lorsque le pas augmente, puis remontent au-delà de la zone de minimum.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="">
+          <button class="zoom" data-image="assets/Yp.png" aria-label="Agrandir : Coefficient de pertes CFD et Ainley-Mathieson en fonction du rapport pas sur corde">
+            <img src="assets/Yp.png" alt="Coefficient de pertes CFD et Ainley-Mathieson en fonction du rapport pas sur corde" loading="lazy">
+          </button>
+          <figcaption>
+            Comparaison des six configurations - CFD et corrélation d’Ainley-Mathieson
+          </figcaption>
+        </figure>
+        <p>
+          Parmi les cas testés, s/b = 0,45 donne les pertes les plus faibles dans les deux approches
+          : Y<sub>P</sub> = 0,0893 en CFD et 0,0955 avec la corrélation, soit un écart de −6,5 %. La
+          zone de faibles pertes autour de 0,40–0,45 est cohérente avec l’estimation de Zweifel à
+          0,416. Les six points étudiés ne permettent toutefois pas de localiser plus précisément le
+          minimum.
+        </p>
+        <details>
+          <summary>Tableau des résultats numériques</summary>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>s/b</th>
+                  <th>Pas (mm)</th>
+                  <th>Y<sub>P</sub> A-M</th>
+                  <th>Y<sub>P</sub> CFD</th>
+                  <th>Mach relatif en sortie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0,30</td>
+                  <td>9,90</td>
+                  <td>0,1065</td>
+                  <td>0,1151</td>
+                  <td>0,628</td>
+                </tr>
+                <tr>
+                  <td>0,35</td>
+                  <td>11,55</td>
+                  <td>0,0982</td>
+                  <td>0,1007</td>
+                  <td>0,613</td>
+                </tr>
+                <tr>
+                  <td>0,40</td>
+                  <td>13,20</td>
+                  <td>0,0975</td>
+                  <td>0,0935</td>
+                  <td>0,603</td>
+                </tr>
+                <tr>
+                  <td>0,45</td>
+                  <td>14,85</td>
+                  <td>0,0955</td>
+                  <td>0,0893</td>
+                  <td>0,599</td>
+                </tr>
+                <tr>
+                  <td>0,50</td>
+                  <td>16,50</td>
+                  <td>0,0990</td>
+                  <td>0,1174</td>
+                  <td>0,630</td>
+                </tr>
+                <tr>
+                  <td>0,60</td>
+                  <td>19,80</td>
+                  <td>0,1075</td>
+                  <td>0,1472</td>
+                  <td>0,914</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="technical">
+            Le rapport épaisseur/corde varie également avec les profils générés ; sa correction est
+            prise en compte dans l’estimation d’Ainley-Mathieson.
+          </p>
+        </details>
+      </section>
+      <!-- SECTION : Pertes pour de grandes valeurs du pas inter-aubes -->
+      <section class="project-section">
+        <h2>Pertes pour de grandes valeurs du pas inter-aubes</h2>
+        <p>
+          Les champs de Mach permettent de comparer le cas à faibles pertes, s/b = 0,45, et le cas
+          s/b = 0,60. Dans le premier, l’écoulement accélère localement puis ralentit en aval. Dans
+          le second, les vitesses restent élevées à la sortie : le Mach relatif passe de 0,599 à
+          0,914.
+        </p>
+        <div class="pair">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/contour_mach_ratio045.png" aria-label="Agrandir : Mach relatif pour s/b = 0,45">
+              <img src="assets/contour_mach_ratio045.png" alt="Mach relatif pour s/b = 0,45" loading="lazy">
+            </button>
+            <figcaption>Mach relatif - s/b = 0,45</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/contour_mach_ratio06.png" aria-label="Agrandir : Mach relatif pour s/b = 0,60">
+              <img src="assets/contour_mach_ratio06.png" alt="Mach relatif pour s/b = 0,60" loading="lazy">
+            </button>
+            <figcaption>Mach relatif - s/b = 0,60</figcaption>
+          </figure>
+        </div>
+        <p>
+          Pour s/b = 0,60, le champ de vecteurs vitesse montre une zone de recirculation près de la
+          paroi. Ce décollement accompagne la hausse du coefficient de pertes, qui atteint 0,1472,
+          contre 0,1075 avec la corrélation.
+        </p>
+        <p>
+          À angles d’écoulement comparables, augmenter le pas accroît la charge aérodynamique
+          supportée par chaque aube : un passage plus large lui confie davantage de débit à dévier.
+          Une charge trop élevée favorise le décollement et les pertes. Réduire le pas répartit
+          cette charge sur davantage d’aubes, mais un espacement trop faible accroît aussi les
+          pertes par frottement. Le minimum observé traduit ce compromis.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="">
+          <button class="zoom" data-image="assets/decollement06.png" aria-label="Agrandir : Vecteurs vitesse montrant une recirculation près de la paroi">
+            <img src="assets/decollement06.png" alt="Vecteurs vitesse montrant une recirculation près de la paroi" loading="lazy">
+          </button>
+          <figcaption>Décollement pour s/b = 0,60 - Détail du champ de vitesse</figcaption>
+        </figure>
+      </section>
+      <!-- SECTION : Portée des résultats -->
+      <section class="project-section">
+        <h2>Portée des résultats</h2>
+        <p>
+          La comparaison situe une zone de faibles pertes autour de s/b = 0,40–0,45. À grand pas,
+          l’écart entre CFD et corrélation augmente nettement. Le cas à 0,60 s’éloigne notamment du
+          domaine de Mach inférieur à 0,6 indiqué pour la corrélation utilisée ; il ne constitue
+          donc pas une comparaison dans les mêmes conditions de validité.
+        </p>
+        <p>
+          Le modèle reste une grille idéale bidimensionnelle et stationnaire. Il ne représente pas
+          les effets tridimensionnels d’un rotor réel. Les résultats permettent de comparer les
+          configurations étudiées, sans constituer une validation expérimentale ni une optimisation
+          complète d’une turbine.
+        </p>
+        <p class="technical">
+          Référence utilisée pour les critères et corrélations : S. L. Dixon et C. A. Hall, <i>Fluid
+          Mechanics and Thermodynamics of Turbomachinery</i>, 7e édition, 2014.
+        </p>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>

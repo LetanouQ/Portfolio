@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Étude CFD d’un diffuseur pour turbine | Quentin Le Tanou</title>
+    <meta name="description" content="Étude CFD d’un diffuseur pour turbine : démarche de modélisation, résultats et analyse numérique.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Étude CFD d’un diffuseur pour turbine -->
+      <section class="hero">
+        <h1>Étude CFD d’un diffuseur pour turbine</h1>
+        <div class="intro">
+          <p>
+            Ce projet réalisé en binôme à l’ENSE3 compare deux stratégies de maillage pour une
+            simulation RANS sous ANSYS Fluent. Le cas étudié est un diffuseur pour turbine
+            hydraulique, dans un écoulement d’eau. Le travail porte sur la sensibilité numérique, la
+            comparaison entre maillage non structuré et overset, puis l’ajout d’un disque d’action
+            représentant la turbine.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Géométrie et champ de vitesse -->
+      <section class="project-section">
+        <h2>Géométrie et champ de vitesse</h2>
+        <p>
+          Le diffuseur comporte deux profils et entoure une turbine de rayon 0,8 m. Le calcul est
+          axisymétrique, avec une vitesse amont de 3 m/s. Dans un premier temps, le diffuseur est
+          étudié seul : le débit à son entrée sert de grandeur de comparaison pour les choix de
+          domaine et de maillage.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/velocity.png" aria-label="Agrandir : Diffuseur sans turbine - Champ de vitesse obtenu avec le maillage non structuré">
+            <img src="assets/velocity.png" alt="Diffuseur sans turbine - Champ de vitesse obtenu avec le maillage non structuré" loading="lazy">
+          </button>
+          <figcaption>
+            Diffuseur sans turbine - Champ de vitesse obtenu avec le maillage non structuré
+          </figcaption>
+        </figure>
+      </section>
+      <!-- SECTION : Sensibilité au domaine et au maillage non structuré -->
+      <section class="project-section">
+        <h2>Sensibilité au domaine et au maillage non structuré</h2>
+        <p>
+          La première approche utilise un maillage non structuré, avec un raffinement autour des
+          profils et des couches près des parois. La taille du domaine est d’abord augmentée, puis
+          trois paramètres sont étudiés séparément : la taille des cellules au loin, celle de la
+          zone raffinée et le taux de croissance.
+        </p>
+        <div class="pair">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/malha_perfil_geral.png" aria-label="Agrandir : Maillage non structuré au voisinage des profils">
+              <img src="assets/malha_perfil_geral.png" alt="Maillage non structuré au voisinage des profils" loading="lazy">
+            </button>
+            <figcaption>Maillage non structuré au voisinage des profils</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/convergenceDominio.png" aria-label="Agrandir : Écart de débit par rapport au plus grand domaine testé">
+              <img src="assets/convergenceDominio.png" alt="Écart de débit par rapport au plus grand domaine testé" loading="lazy">
+            </button>
+            <figcaption>Écart de débit par rapport au plus grand domaine testé</figcaption>
+          </figure>
+        </div>
+        <p>
+          Le domaine retenu donne un débit à moins de 1 % de celui obtenu sur le plus grand domaine
+          testé. Une configuration de maillage moins coûteuse est conservée, les raffinements
+          supplémentaires apportant peu de changement sur cette grandeur.
+        </p>
+        <p>
+          Ces comparaisons vérifient la sensibilité de cette grandeur globale dans la plage étudiée.
+          Elles ne garantissent pas la même précision sur tous les détails locaux de l’écoulement.
+        </p>
+        <p>
+          L’agrandissement du domaine fait passer le débit d’environ 11 860 à 12 000 kg/s. Le
+          domaine retenu donne environ 11 945 kg/s, soit un écart de 0,46 % avec le plus grand
+          domaine testé. Le raffinement du maillage modifie également le débit de moins de 1 % dans
+          les configurations comparées.
+        </p>
+      </section>
+      <!-- SECTION : Maillage overset et comparaison des résultats -->
+      <section class="project-section">
+        <h2>Maillage overset et comparaison des résultats</h2>
+        <p>
+          La seconde approche superpose un maillage de fond et deux maillages ajustés aux profils.
+          Elle permet de construire séparément les différentes zones, puis d’échanger les
+          informations par interpolation dans les régions de recouvrement.
+        </p>
+        <div class="pair">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Main.png" aria-label="Agrandir : Maillage overset du profil principal">
+              <img src="assets/Main.png" alt="Maillage overset du profil principal" loading="lazy">
+            </button>
+            <figcaption>Maillage overset du profil principal</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/Second.png" aria-label="Agrandir : Maillage overset du profil secondaire">
+              <img src="assets/Second.png" alt="Maillage overset du profil secondaire" loading="lazy">
+            </button>
+            <figcaption>Maillage overset du profil secondaire</figcaption>
+          </figure>
+        </div>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/celltype_new.png" aria-label="Agrandir : Zones de calcul et d’interpolation entre les maillages">
+            <img src="assets/celltype_new.png" alt="Zones de calcul et d’interpolation entre les maillages" loading="lazy">
+          </button>
+          <figcaption>Zones de calcul et d’interpolation entre les maillages</figcaption>
+        </figure>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/velocity_overset.png" aria-label="Agrandir : Champ de vitesse avec le maillage overset">
+            <img src="assets/velocity_overset.png" alt="Champ de vitesse avec le maillage overset" loading="lazy">
+          </button>
+          <figcaption>Champ de vitesse avec le maillage overset</figcaption>
+        </figure>
+        <p>
+          Les champs présentent les mêmes tendances générales. Le maillage overset comprend 25 844
+          cellules avant désactivation des zones masquées. Le débit calculé atteint 13 002 kg/s,
+          avec un écart de 8,7 % par rapport à la référence non structurée utilisée pour cette
+          comparaison. Des discontinuités sont visibles près des interfaces ; les interpolations
+          constituent une piste d’explication, sans être la seule différence entre les deux
+          discrétisations.
+        </p>
+        <p>
+          Pour cette géométrie fixe, le maillage non structuré offre ici le compromis retenu. La
+          comparaison overset constitue une vérification complémentaire, pas une validation
+          expérimentale.
+        </p>
+      </section>
+      <!-- SECTION : Modélisation de la turbine par disque d’action -->
+      <section class="project-section">
+        <h2>Modélisation de la turbine par disque d’action</h2>
+        <p>
+          La turbine est ensuite introduite sous la forme d’un disque d’action imposant un saut de
+          pression. Cette représentation permet d’estimer l’extraction d’énergie sans modéliser les
+          pales ni leur rotation.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/velocityTurbina.png" aria-label="Agrandir : Diffuseur avec disque d’action - Sillage de la turbine">
+            <img src="assets/velocityTurbina.png" alt="Diffuseur avec disque d’action - Sillage de la turbine" loading="lazy">
+          </button>
+          <figcaption>Diffuseur avec disque d’action - Sillage de la turbine</figcaption>
+        </figure>
+        <p>
+          Le calcul donne un coefficient de puissance de 0,87, normalisé par la surface du rotor et
+          la vitesse amont, soit environ 23,6 kW dans les conditions étudiées. Cette valeur concerne
+          le modèle de turbine carénée et cette surface de référence ; elle ne représente pas un
+          rendement global de l’installation.
+        </p>
+        <p>
+          La sensibilité du coefficient de puissance au maillage n’a pas été étudiée aussi
+          complètement que le débit du diffuseur seul. Une vérification dédiée serait nécessaire
+          avant d’utiliser cette estimation pour comparer des performances.
+        </p>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Écoulement autour d’un cylindre sous OpenFOAM | Quentin Le Tanou</title>
+    <meta name="description" content="Simulation laminaire 2D autour d’un cylindre sous OpenFOAM : sensibilité numérique, traînée et allées de von Kármán.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <a class="name" href="../../index.html">Quentin Le Tanou</a>
+        <a class="back-home" href="../../index.html">Tous les projets</a>
+      </div>
+      <div class="header-contact">
+        <a href="../../documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- MODIFICATION DU TEXTE : les paragraphes sont dans les balises p. Les titres sont dans h1,
+      h2 et h3. -->
+      <!-- SECTION : Écoulement autour d’un cylindre sous OpenFOAM -->
+      <section class="hero">
+        <h1>Écoulement autour d’un cylindre sous OpenFOAM</h1>
+        <div class="intro">
+          <p>
+            Ce bureau d’étude réalisé à l’ENSE3 porte sur un écoulement laminaire bidimensionnel
+            autour d’un cylindre. Les simulations à Reynolds 20, 40 et 60 permettent de comparer les
+            sillages stationnaires et le détachement périodique de tourbillons. L’étude examine
+            aussi l’influence du maillage, du schéma de convection et du pas de temps sur les
+            résultats.
+          </p>
+        </div>
+      </section>
+      <!-- SECTION : Le modèle numérique -->
+      <section class="project-section">
+        <h2>Le modèle numérique</h2>
+        <p>
+          Les calculs sont réalisés avec le solveur incompressible icoFoam, sans modèle de
+          turbulence. Le diamètre du cylindre D et la vitesse à l’infini U sont fixés respectivement
+          à 1 m et 1 m/s. La viscosité cinématique est ajustée pour obtenir le nombre de Reynolds
+          souhaité.
+        </p>
+        <div class="equation">
+          Re = UD / ν
+        </div>
+        <p>
+          Le domaine est circulaire et le maillage structuré. Une vitesse est imposée sur la moitié
+          amont du domaine, une pression de référence sur la moitié aval et une condition de
+          non-glissement sur le cylindre. Une étude initiale de la taille du domaine a été menée
+          pour limiter l’influence des frontières sur le résultat. Le diamètre extérieur retenu est
+          de 40D. Trois maillages de 2 080, 8 160 et 32 320 cellules sont ensuite comparés.
+        </p>
+        <details>
+          <summary>Voir le maillage</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="geometry">
+            <button class="zoom" data-image="assets/maillage20D.png" aria-label="Agrandir : Maillage structuré autour du cylindre">
+              <img src="assets/maillage20D.png" alt="Maillage structuré autour du cylindre" loading="lazy">
+            </button>
+            <figcaption>Domaine de diamètre 40D - 32 320 cellules</figcaption>
+          </figure>
+        </details>
+      </section>
+      <!-- SECTION : Deux sillages stationnaires -->
+      <section class="project-section">
+        <h2>Deux sillages stationnaires</h2>
+        <p>
+          À Reynolds 20 et 40, les calculs avec le schéma centré donnent un sillage stationnaire et
+          symétrique. La zone de faible vitesse en aval du cylindre s’allonge lorsque le nombre de
+          Reynolds augmente.
+        </p>
+        <div class="pair">
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/20.png" aria-label="Agrandir : Champ de vitesse à Reynolds 20">
+              <img src="assets/20.png" alt="Champ de vitesse à Reynolds 20" loading="lazy">
+            </button>
+            <figcaption>Re = 20 - Norme de la vitesse en m/s</figcaption>
+          </figure>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure class="">
+            <button class="zoom" data-image="assets/40.png" aria-label="Agrandir : Champ de vitesse à Reynolds 40">
+              <img src="assets/40.png" alt="Champ de vitesse à Reynolds 40" loading="lazy">
+            </button>
+            <figcaption>Re = 40 - Norme de la vitesse en m/s</figcaption>
+          </figure>
+        </div>
+        <p>
+          À Reynolds 20, le coefficient de traînée varie très peu avec le raffinement pour le schéma
+          centré. Avec le schéma décentré amont (upwind), il diminue sensiblement lorsque le nombre
+          de cellules augmente. Les deux schémas restent séparés d’environ 5 % sur le maillage le
+          plus fin.
+        </p>
+        <details>
+          <summary>Tableau des résultats selon le maillage</summary>
+          <div class="table-wrap">
+            <table>
+              <caption>
+                Coefficient de traînée à Re = 20, domaine de diamètre 40D
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Nombre de cellules</th>
+                  <th scope="col">Centré</th>
+                  <th scope="col">Upwind</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2 080</td>
+                  <td>2,345</td>
+                  <td>2,853</td>
+                </tr>
+                <tr>
+                  <td>8 160</td>
+                  <td>2,344</td>
+                  <td>2,597</td>
+                </tr>
+                <tr>
+                  <td>32 320</td>
+                  <td>2,345</td>
+                  <td>2,472</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <p>
+          Cette faible variation du résultat centré ne suffit pas, à elle seule, à valider le calcul
+          : la valeur obtenue reste supérieure à la référence retenue.
+        </p>
+      </section>
+      <!-- SECTION : Les allées de von Kármán à Reynolds 60 -->
+      <section class="project-section">
+        <h2>Les allées de von Kármán à Reynolds 60</h2>
+        <p>
+          À Reynolds 60, le sillage devient instationnaire sur les deux maillages les plus fins avec
+          le schéma centré. Le détachement alterné des tourbillons s’accompagne d’une oscillation
+          périodique de la traînée.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="">
+          <button class="zoom" data-image="assets/von_karman.png" aria-label="Agrandir : Sillage instationnaire à Reynolds 60">
+            <img src="assets/von_karman.png" alt="Sillage instationnaire à Reynolds 60" loading="lazy">
+          </button>
+          <figcaption>Re = 60 - Champ instantané de la norme de la vitesse en m/s</figcaption>
+        </figure>
+        <p>
+          Sur le maillage de 32 320 cellules, le pas de temps est réduit de 0,02 à 0,01 s, avec un
+          nombre de Courant maximal d’environ 0,6 dans le second calcul. Le coefficient de traînée
+          moyen passe de 1,590 à 1,596. Le maillage le plus grossier ne fait pas apparaître de
+          détachement périodique sur la durée simulée.
+        </p>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure class="">
+          <button class="zoom" data-image="assets/zoom_60.png" aria-label="Agrandir : Oscillations périodiques du coefficient de traînée">
+            <img src="assets/zoom_60.png" alt="Oscillations périodiques du coefficient de traînée" loading="lazy">
+          </button>
+          <figcaption>Re = 60 - Traînée après établissement du régime périodique</figcaption>
+        </figure>
+        <h3>Fréquence de détachement</h3>
+        <p>
+          La période des oscillations de traînée est d’environ 3,7 s. La traînée oscille deux fois
+          plus vite que le détachement alterné des tourbillons : la période de détachement déduite
+          est donc de 7,4 s. On obtient St = fD/U ≈ 0,135, en accord avec la valeur de référence
+          d’environ 0,14.
+        </p>
+        <p>
+          Avec le schéma upwind, le calcul sur le même maillage fin reste stationnaire dans les
+          conditions étudiées, avec un coefficient de traînée de 1,636. La comparaison montre que le
+          choix du schéma influence aussi la restitution de l’instationnarité, au-delà de la seule
+          valeur moyenne de la traînée.
+        </p>
+      </section>
+      <!-- SECTION : Comparaison de la traînée -->
+      <section class="project-section">
+        <h2>Comparaison de la traînée</h2>
+        <p>
+          Sur le maillage fin, les coefficients obtenus avec le schéma centré diminuent lorsque le
+          nombre de Reynolds augmente. Ils restent environ 12 à 14 % au-dessus des valeurs de
+          référence relevées dans le rapport.
+        </p>
+        <details>
+          <summary>Tableau des coefficients de traînée</summary>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Reynolds</th>
+                  <th scope="col">C<sub>D</sub> calculé</th>
+                  <th scope="col">Référence approximative</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>20</td>
+                  <td>2,345</td>
+                  <td>2,10</td>
+                </tr>
+                <tr>
+                  <td>40</td>
+                  <td>1,749</td>
+                  <td>1,55</td>
+                </tr>
+                <tr>
+                  <td>60</td>
+                  <td>1,596 (moyenne)</td>
+                  <td>1,40</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <p>
+          Les simulations reproduisent les régimes d’écoulement attendus, mais cet écart persistant
+          demanderait une vérification complémentaire des conditions aux limites, du calcul des
+          efforts et de la taille du domaine. L’étude permet surtout de comparer les choix
+          numériques et leur influence sur le sillage ; elle ne constitue pas une validation
+          quantitative complète.
+        </p>
+      </section>
+    </main>
+    <dialog id="lightbox">
+      <button id="close" aria-label="Fermer l’image">
+        Fermer ×
+      </button>
+      <img alt="">
+    </dialog>
+    <script src="script.js">
+    </script>
+  </body>
+</html>
