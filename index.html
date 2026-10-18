@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quentin Le Tanou | Mécanique et énergétique</title>
+    <meta name="description" content="Portfolio de Quentin Le Tanou : projets en turbomachines, thermique, mécanique des fluides et instrumentation. Recherche de stage de fin d’études en février 2027.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="identity">
+        <h1 class="name">Quentin Le Tanou</h1>
+        <p class="profile-line">Étudiant ingénieur en mécanique et énergétique</p>
+      </div>
+      <div class="header-contact">
+        <a href="documents/Quentin_Le_Tanou_CV.pdf">Mon CV (PDF)</a>
+        <div class="email-row">
+          <span class="email-address">quentin.le-tanou@grenoble-inp.org</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- SECTION : Présentation -->
+      <section class="hero">
+        <p>
+          Étudiant ingénieur en dernière année à l’ENSE3, je m’intéresse à la propulsion, aux
+          turbomachines et aux systèmes thermiques. Mon échange à Chalmers complète cette formation
+          en turbomachines, propulsion aérospatiale et thermodynamique des centrales.
+        </p>
+        <p>
+          Je recherche un stage de fin d’études de six mois à partir de février 2027, en
+          Île-de-France. Je souhaite travailler sur des sujets de recherche appliquée et, à terme,
+          poursuivre en doctorat, idéalement dans le cadre d’une CIFRE.
+        </p>
+      </section>
+      <!-- SECTION : Quelques projets -->
+      <section id="projets">
+        <h2>Quelques projets</h2>
+        <p class="section-intro">
+          Ce portfolio rassemble des travaux de formation et de stage. Chaque page présente le
+          problème étudié, les choix de modélisation ou de mesure, puis les principaux résultats et
+          leurs limites.
+        </p>
+        <div class="projects">
+          <!-- PROJET : Grille d’aubes de turbine -->
+          <article class="project">
+            <a href="projets/turbine/index.html">
+              <img src="projets/turbine/assets/blade.png" alt="" loading="lazy">
+              <h3>Rotor de turbine</h3>
+              <p>
+                Influence du pas inter-aubes sur les pertes d’un rotor de turbine, étudiée sous
+                STAR-CCM+
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Tuyère de Laval -->
+          <article class="project">
+            <a href="projets/compressible/index.html">
+              <img src="projets/compressible/assets/config3-Mcontour.png" alt="" loading="lazy">
+              <h3>Tuyère de Laval</h3>
+              <p>
+                Régimes compressibles, chocs et comparaison entre modèle quasi-1D et CFD sous Fluent
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Cycles vapeur -->
+          <article class="project">
+            <a href="projets/rankine/index.html">
+              <img src="projets/rankine/assets/Model1.png" alt="" loading="lazy">
+              <h3>Cycles vapeur</h3>
+              <p>
+                Du cycle Rankine simple à la cogénération, avec une analyse de sensibilité sous
+                EBSILON
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Cycles gaz et combinés -->
+          <article class="project">
+            <a href="projets/brayton/index.html">
+              <img src="projets/brayton/assets/simple.png" alt="" loading="lazy">
+              <h3>Cycles gaz et combinés</h3>
+              <p>
+                Modélisation sous EBSILON : du cycle Brayton simple aux cycles combinés et à la
+                cogénération
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Instrumentation d’une soufflerie -->
+          <article class="project">
+            <a href="projets/legi/index.html">
+              <img src="projets/legi/assets/boitier-interieur.jpg" alt="" loading="lazy">
+              <h3>Instrumentation d’une soufflerie</h3>
+              <p>
+                Mesure de débit par pression différentielle, étalonnage et analyse des incertitudes
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Coup de bélier et résonance -->
+          <article class="project">
+            <a href="projets/hydraulique/index.html">
+              <img src="projets/hydraulique/assets/h_sc.png" alt="" loading="lazy">
+              <h3>Coup de bélier et résonance</h3>
+              <p>
+                Modélisation sous MATLAB des transitoires dans une conduite par la méthode des
+                caractéristiques
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Diffuseur pour turbine -->
+          <article class="project">
+            <a href="projets/diffuseur/index.html">
+              <img src="projets/diffuseur/assets/velocity.png" alt="" loading="lazy">
+              <h3>Diffuseur pour turbine</h3>
+              <p>
+                Simulation RANS et comparaison des maillages non structuré et overset sous Fluent
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+          <!-- PROJET : Écoulement autour d’un cylindre -->
+          <article class="project">
+            <a href="projets/openfoam/index.html">
+              <img src="projets/openfoam/assets/von_karman.png" alt="" loading="lazy">
+              <h3>Écoulement autour d’un cylindre</h3>
+              <p>
+                Sensibilité numérique et détachement tourbillonnaire en écoulement laminaire sous
+                OpenFOAM
+              </p>
+              <span class="read">Voir le projet →</span>
+            </a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+/* Style de l’accueil : couleurs, dimensions et espacement */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #fbfcfd;
+  color: #263c4a;
+  font: 17px/1.7 "Segoe UI", Arial, sans-serif;
+}
+a { color: inherit; text-underline-offset: 4px; }
+header, main, footer { max-width: 1160px; margin: auto; padding: 0 36px; }
+.top { display: flex; justify-content: space-between; gap: 24px; padding-top: 28px; padding-bottom: 24px; border-bottom: 1px solid #dce4e8; }
+.name { font-size: 19px; font-weight: 600; text-decoration: none; }
+.top > a:last-child { font-size: 15px; }
+.hero { padding: 48px 0 44px; }
+h1, h2, h3 { color: #153f60; line-height: 1.2; font-weight: 500; }
+h1 { font-size: clamp(34px, 4.5vw, 50px); margin: 16px 0 28px; }
+h2 { font-size: 28px; margin: 0 0 18px; }
+h3 { font-size: 23px; margin: 20px 0 12px; }
+p { margin: 16px 0; }
+.contact { display: flex; flex-wrap: wrap; gap: 14px 30px; margin-top: 26px; color: #006e7b; }
+.section-intro { margin-bottom: 34px; }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px 42px; }
+.project { border-bottom: 1px solid #dce4e8; padding-bottom: 26px; }
+.project > a { display: block; height: 100%; text-decoration: none; }
+.project img { display: block; width: 100%; height: 230px; object-fit: contain; background: white; }
+.project p { font-size: 16px; margin: 0 0 12px; }
+.read { color: #006e7b; font-size: 14px; }
+.project a:hover h3, .project a:hover .read { text-decoration: underline; text-underline-offset: 4px; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 36px; padding-bottom: 36px; margin-top: 30px; font-size: 13px; color: #627783; }
+a:focus-visible { outline: 3px solid #d48235; outline-offset: 5px; }
+@media (max-width: 720px) {
+  header, main, footer { padding-left: 20px; padding-right: 20px; }
+  .projects { grid-template-columns: 1fr; gap: 28px; }
+  .hero { padding-top: 30px; }
+  .project img { height: 210px; }
+  footer a { overflow-wrap: anywhere; }
+}
+
+/* En-tête et contact : adresse visible et copiable sans ouvrir une messagerie */
+.top { align-items: flex-start; gap: 24px; }
+.identity { display: flex; flex-direction: column; gap: 6px; }
+.identity .name { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.4; }
+.profile-line { margin: 0; color: #153f60; font-size: 18px; line-height: 1.4; }
+.header-contact { text-align: right; font-size: 14px; }
+.email-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.email-address { user-select: all; overflow-wrap: anywhere; }
+.copy-email { background: none; border: 1px solid #ccdce2; border-radius: 3px; padding: 2px 7px; color: #526773; font: inherit; font-size: 12px; cursor: pointer; }
+.copy-status { font-size: 12px; color: #526773; }
+main { padding-bottom: 40px; }
+video { display: block; width: 100%; height: auto; }
+.measurement-diagram { max-width: 520px !important; }
+.metric, .secondary-metric, .conditions { color: #52616b; }
+.metric { font-size: 26px; }
+@media(max-width: 720px) {
+  .top { flex-direction: column; }
+  .header-contact { text-align: left; }
+  .email-row { flex-wrap: wrap; }
+}
+
+/* Pas de séparateur sous la dernière rangée de projets */
+.project:nth-last-child(-n+2) { border-bottom: 0; }
+@media(max-width:720px) { .project:nth-last-child(2) { border-bottom: 1px solid #dce4e8; } }
