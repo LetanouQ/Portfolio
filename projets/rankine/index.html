@@ -28,11 +28,11 @@
         <h1>Du cycle Rankine simple à la centrale à vapeur</h1>
         <div class="intro">
           <p>
-            Dans le cadre du cours <i>Heat and Power Systems Engineering</i> à Chalmers en 2026,
-            j’ai réalisé sous EBSILON Professional une série de modèles de centrales à vapeur et
-            analysé leurs performances. Quatre configurations illustrent ici la progression : cycle
-            simple, régénération par soutirage, architecture supercritique et cogénération. Une
-            étude de sensibilité à la pression de vapeur complète l’analyse de cette dernière
+            Dans le cadre du cours Heat and Power Systems Engineering à Chalmers en 2026, j’ai
+            réalisé sous EBSILON Professional une série de modèles de centrales à vapeur et analysé
+            leurs performances. Quatre configurations illustrent ici la progression : cycle simple,
+            régénération par soutirage, architecture supercritique et cogénération. Une étude de
+            sensibilité à la pression de la vapeur vive complète l’analyse de cette dernière
             configuration.
           </p>
         </div>
@@ -78,9 +78,9 @@
               d’alimentation, dans un réchauffeur et un dégazeur.
             </p>
             <p>
-              Cette récupération interne réduit la chaleur à apporter au générateur de vapeur, mais
-              diminue aussi le débit poursuivant la détente. L’intérêt se juge sur le bilan du
-              cycle.
+              Cette récupération augmente le rendement du cycle en réduisant la chaleur à apporter
+              au générateur de vapeur. En contrepartie, le sous-tirage diminue le débit de vapeur
+              qui poursuit la détente dans la turbine.
             </p>
             <div class="metric">
               20,0 %
@@ -99,13 +99,9 @@
           <div>
             <h3>Cycle supercritique avec resurchauffe</h3>
             <p>
-              Le modèle inspiré de Nordjylland combine des conditions de vapeur élevées, une
-              resurchauffe et plusieurs niveaux de soutirage. Le réseau de réchauffeurs permet un
-              préchauffage progressif de l’eau d’alimentation.
-            </p>
-            <p>
-              Cette représentation pédagogique comporte une seule resurchauffe. Elle permet
-              d’étudier le couplage entre les étages de détente et le circuit d’alimentation en eau.
+              Ce modèle, inspiré de la centrale de Nordjylland au Danemark, combine des conditions
+              de vapeur élevées, une resurchauffe et plusieurs soutirages. Le réseau de réchauffeurs
+              permet un préchauffage progressif de l’eau d’alimentation.
             </p>
           </div>
           <div class="metric">
@@ -124,19 +120,18 @@
           <div>
             <h3>Cogénération</h3>
             <p>
-              Deux échangeurs alimentés par des soutirages vapeur ajoutent une production de chaleur
-              pour un réseau de chauffage à la configuration précédente.
+              Deux échangeurs alimentés par des soutirages vapeur ajoutent une capacité de
+              production de chaleur pour un réseau de chauffage à la configuration précédente.
             </p>
             <p>
               Une partie de la vapeur contribue ainsi à la fourniture de chaleur utile plutôt qu’à
-              la seule production électrique. Le rendement électrique passe d’environ 49,4 % à 44,1
-              %, tandis que le rendement global, électricité et chaleur utile comprises, atteint
+              la seule production électrique. Le rendement électrique diminue de 49,4 % à 44,1 %,
+              tandis que le rendement global, électricité et chaleur utile comprises, atteint
               environ 75,3 %.
             </p>
             <p>
-              La cogénération améliore donc la valorisation globale de l’énergie, à condition de
-              disposer d’un besoin de chaleur adapté. C’est sur cette configuration de cogénération
-              que porte l’étude paramétrique ci-dessous.
+              La cogénération permet ainsi de valoriser la chaleur précédemment rejetée, à condition
+              de disposer d’un besoin de chaleur adapté.
             </p>
           </div>
           <div class="metric">
@@ -161,26 +156,22 @@
       <!-- SECTION : Présentation -->
       <section id="analyse">
         <div class="section-head">
-          <h2>Impact d’une variation de la pression de vapeur</h2>
+          <h2>Impact d’une variation de la pression de vapeur vive</h2>
           <p>
-            L’analyse porte sur le cycle avec cogénération. Elle évalue l’effet de la pression de
-            vapeur vive sur le rendement et la puissance électrique nette, pour une fourniture de
-            chaleur fixée à 250 MW.
+            Une analyse d'impact a été menée sur le cycle avec cogénération. Elle évalue l’effet de
+            la pression de vapeur vive sur le rendement et la puissance électrique nette, pour une
+            fourniture de chaleur fixée à 250 MW.
           </p>
         </div>
         <p>
-          La pression de vapeur varie de 270 à 300 bar. Les températures sont fixées à 582 °C en
-          sortie du générateur et à 580 °C après resurchauffe. La condensation s’effectue autour de
-          20 °C et la chaleur utile fournie au réseau est maintenue à 250 MW.
-        </p>
-        <p>
-          La pression de vapeur vive varie à conditions imposées inchangées. La puissance électrique
-          est calculée après déduction de la consommation des pompes prise en compte dans le modèle.
+          La pression de vapeur a été variée entre 270 et 300 bar. Les températures sont fixées à
+          582 °C en sortie du générateur et à 580 °C après resurchauffe. La condensation s’effectue
+          à 15 °C.
         </p>
         <div class="charts">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure>
-            <img src="assets/rendement.svg" alt="Le rendement électrique net augmente de 43,976 à 44,191 pour cent entre 270 et 300 bar">
+            <img src="assets/rendement-corrige.png" alt="Le rendement électrique net augmente de 43,976 à 44,191 pour cent entre 270 et 300 bar">
             <figcaption>
               Un gain de rendement positif, dont la pente diminue sur la plage étudiée
             </figcaption>
@@ -193,37 +184,23 @@
         </div>
         <div class="result">
           <p>
-            Entre 270 et 300 bar, le rendement électrique net passe de 43,976 % à 44,191 %. La
+            Entre 270 et 300 bar, le rendement électrique net passe de 43,98 % à 44,19 %. La
             puissance nette augmente de 3,33 MW, soit environ 0,95 %.
           </p>
         </div>
         <p>
-          Dans les conditions étudiées, augmenter la pression améliore les performances, mais le
-          gain reste modéré. Cette analyse quantifie un levier thermodynamique ; elle ne suffit pas
-          à déterminer un optimum technico-économique, qui demanderait notamment d’intégrer les
-          contraintes mécaniques et le coût des équipements.
+          Le rendement augmente avec la pression de vapeur vive, mais les gains deviennent
+          progressivement plus faibles. Sur le diagramme T-s, le resserrement des isobares à haute
+          pression permet d’interpréter cette tendance : à température maximale fixée, une même
+          hausse de pression apporte un gain de rendement de plus en plus limité.
         </p>
-        <details>
-          <summary>Diagramme température-entropie</summary>
-          <p>
-            À température de vapeur vive fixée, le passage de 270 à 300 bar déplace l’entrée de la
-            turbine vers une entropie plus faible. Les trajectoires diffèrent surtout pendant le
-            chauffage à haute pression et la première détente ; elles se rejoignent après la
-            resurchauffe, dont les conditions de sortie sont imposées.
-          </p>
-          <p>
-            Le rendement augmente sur la plage étudiée, mais le gain diminue à mesure que la
-            pression s’élève. Le rapprochement des isobares à haute pression permet d’interpréter
-            qualitativement cette tendance, également observée dans les bilans du cycle.
-          </p>
-          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
-          <figure>
-            <button class="zoom" data-image="assets/Diagrams.png" aria-label="Agrandir la comparaison des diagrammes à 270 et 300 bar">
-              <img src="assets/Diagrams.png" alt="Diagrammes température-entropie superposés : 270 bar en violet et 300 bar en vert" loading="lazy">
-            </button>
-            <figcaption>Comparaison à 270 bar (violet) et 300 bar (vert)</figcaption>
-          </figure>
-        </details>
+        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <figure>
+          <button class="zoom" data-image="assets/Diagrams.png" aria-label="Agrandir la comparaison des diagrammes à 270 et 300 bar">
+            <img src="assets/Diagrams.png" alt="Diagrammes température-entropie superposés : 270 bar en violet et 300 bar en vert" loading="lazy">
+          </button>
+          <figcaption>Comparaison à 270 bar (violet) et 300 bar (vert)</figcaption>
+        </figure>
         <details>
           <summary>Tableau des résultats du cycle avec cogénération</summary>
           <p>
@@ -301,3 +278,4 @@
     </script>
   </body>
 </html>
+

@@ -28,11 +28,11 @@
         <h1>Écoulements compressibles dans une tuyère de Laval</h1>
         <div class="intro">
           <p>
-            Ce bureau d’étude réalisé à l’ENSE3 compare une approche analytique
-            quasi-unidimensionnelle à des simulations axisymétriques sous ANSYS Fluent. L’objectif
-            est d’étudier les régimes d’écoulement dans une tuyère convergente-divergente en faisant
-            varier la pression de sortie, puis d’examiner les limites du modèle quasi-1D et
-            l’influence des effets visqueux.
+            Ce bureau d’étude réalisé à l’ENSE3 en 2026 compare une approche analytique quasi-1D à
+            des simulations 2D-axisymétriques sous ANSYS Fluent. L’objectif est d’étudier les
+            régimes d’écoulement dans une tuyère convergente-divergente en faisant varier la
+            pression de sortie, puis d’examiner les limites du modèle quasi-1D et l’influence des
+            effets visqueux.
           </p>
         </div>
       </section>
@@ -41,7 +41,7 @@
         <h2>Modèles quasi-1D et axisymétrique</h2>
         <p>
           La tuyère mesure 1 m, avec un col situé à mi-longueur. L’air est assimilé à un gaz
-          parfait, avec une pression totale d’entrée de 200 kPa et une température totale de 300 K.
+          parfait, avec en entrée une pression totale de 200 kPa et une température totale de 300 K.
           Les relations isentropiques et de choc droit permettent de déterminer le débit, le Mach et
           la pression pour cinq configurations : écoulement subsonique, col sonique avec divergent
           subsonique, choc interne, choc en sortie et tuyère adaptée.
@@ -52,6 +52,16 @@
           cellules. La comparaison porte sur le débit massique et sur la répartition du Mach et de
           la pression dans la tuyère.
         </p>
+        <details>
+          <summary>Voir le maillage</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/maillage.png" aria-label="Agrandir : Maillage du domaine axisymétrique">
+              <img src="assets/maillage.png" alt="Maillage du domaine axisymétrique" loading="lazy">
+            </button>
+            <figcaption>Maillage du domaine axisymétrique</figcaption>
+          </figure>
+        </details>
       </section>
       <!-- SECTION : Régimes d’écoulement selon la pression de sortie -->
       <section class="project-section">
@@ -80,10 +90,10 @@
         </div>
         <p class="technical">Les échelles de Mach diffèrent entre ces deux figures.</p>
         <p>
-          Entre ces régimes, un choc peut ramener l’écoulement à un état subsonique dans le
-          divergent. Pour la pression de sortie correspondant à un choc à l’extrémité de la tuyère
-          en quasi-1D, le calcul 2D fait apparaître un front qui débute légèrement en amont près de
-          la paroi.
+          En fonction des conditions de sortie, un choc peut ramener l'écoulement à un état
+          subsonique dans le divergent. Pour la pression de sortie correspondant à un choc à
+          l’extrémité de la tuyère en quasi-1D, le calcul 2D fait apparaître un front qui débute
+          légèrement en amont près de la paroi.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -101,7 +111,7 @@
                   <th scope="col">Configuration visée en quasi-1D</th>
                   <th scope="col">Quasi-1D (kg/s)</th>
                   <th scope="col">CFD non visqueuse (kg/s)</th>
-                  <th scope="col">Écart</th>
+                  <th scope="col">Écart absolu (%)</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,31 +119,31 @@
                   <td>Mach 0,5 au col</td>
                   <td>348,3</td>
                   <td>320,4</td>
-                  <td>−8,0 %</td>
+                  <td>8,0 %</td>
                 </tr>
                 <tr>
                   <td>Col sonique, divergent subsonique</td>
                   <td>466,7</td>
                   <td>443,02</td>
-                  <td>−5,1 %</td>
+                  <td>5,1 %</td>
                 </tr>
                 <tr>
                   <td>Choc interne</td>
                   <td>466,7</td>
                   <td>448,32</td>
-                  <td>−3,9 %</td>
+                  <td>3,9 %</td>
                 </tr>
                 <tr>
                   <td>Choc en sortie</td>
                   <td>466,7</td>
                   <td>448,32</td>
-                  <td>−3,9 %</td>
+                  <td>3,9 %</td>
                 </tr>
                 <tr>
                   <td>Tuyère adaptée</td>
                   <td>466,7</td>
                   <td>448,32</td>
-                  <td>−3,9 %</td>
+                  <td>3,9 %</td>
                 </tr>
               </tbody>
             </table>
@@ -146,8 +156,8 @@
         <p>
           Pour un choc prévu à x = 0,75 m par le calcul quasi-1D, la simulation non visqueuse situe
           le front autour de x = 0,72 m. Les profils de Mach montrent une variation importante entre
-          l’axe et la paroi. Le front n’est donc pas parfaitement droit, contrairement à l’hypothèse
-          du modèle analytique.
+          l’axe de symétrie et la paroi. Le front n’est donc pas parfaitement droit, contrairement à
+          l’hypothèse du modèle analytique.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -161,18 +171,16 @@
         <p>
           Les débits calculés en 2D sont de 4 à 8 % inférieurs aux estimations quasi-1D selon la
           configuration. Les gradients radiaux illustrent une limite de l’hypothèse d’un écoulement
-          uniforme dans chaque section. Les écarts ne peuvent toutefois pas être attribués
-          uniquement à cette hypothèse sans vérifier aussi la sensibilité numérique.
+          uniforme dans chaque section.
         </p>
       </section>
       <!-- SECTION : Comparaison des modèles non visqueux et RANS -->
       <section class="project-section">
         <h2>Comparaison des modèles non visqueux et RANS</h2>
         <p>
-          Le cas avec choc interne est repris avec un modèle RANS k-ε et un maillage de 7 280
-          cellules, raffiné près de la paroi. Les conditions de pression sont conservées. Le débit
-          passe de 448,32 à 418,78 kg/s, soit une diminution de 6,6 % par rapport au calcul non
-          visqueux.
+          Le cas avec choc interne est comparé avec un modèle RANS k-ε et un maillage raffiné près
+          de la paroi. Les conditions de pression sont conservées. Le débit passe de 448,32 à 418,78
+          kg/s, soit une diminution de 6,6 % par rapport au calcul non visqueux.
         </p>
         <div class="pair">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
@@ -193,10 +201,8 @@
         <p class="technical">Les deux champs sont présentés avec la même échelle de Mach.</p>
         <p>
           La prise en compte de la viscosité modifie nettement le régime d’écoulement. La
-          redistribution des gradients de vitesse et de pression s’accompagne d’une atténuation du
-          choc, jusqu’à sa disparition dans ce calcul, où l’écoulement reste subsonique. Ce
-          changement de régime mérite une analyse complémentaire de la sensibilité au maillage et au
-          modèle de turbulence.
+          redistribution des gradients de vitesse et de pression mène à la disparition du choc dans
+          ce calcul, où l'écoulement demeure subsonique.
         </p>
       </section>
     </main>
@@ -210,3 +216,4 @@
     </script>
   </body>
 </html>
+

@@ -29,10 +29,11 @@
         <div class="intro">
           <p>
             Ce projet, réalisé dans le cadre du cours de turbomachines à Chalmers en 2026, étudie
-            l’influence du pas inter-aubes sur les pertes d’un rotor de turbine. Une analyse
-            préliminaire de l’étage définit les conditions d’entrée et une première estimation du
-            pas. Six simulations CFD sous STAR-CCM+, sur une coupe bidimensionnelle du rotor, sont
-            ensuite comparées à la corrélation d’Ainley-Mathieson.
+            l’influence du pas inter-aubes sur les pertes d’un rotor de turbine. Les conditions à
+            l'entrée du rotor et une première estimation du pas optimal ont été calculées de manière
+            analytique à partir des conditions à l'entrée du stator. Six simulations CFD sous
+            STAR-CCM+, sur une coupe bidimensionnelle du rotor, sont ensuite comparées à la
+            corrélation empirique d’Ainley-Mathieson.
           </p>
         </div>
       </section>
@@ -41,16 +42,16 @@
         <h2>Conditions d’entrée</h2>
         <p>
           Le rotor appartient à un étage à réaction nulle. L’analyse repose sur les triangles de
-          vitesses et les relations thermodynamiques, en supposant l’air parfait et les pertes du
-          distributeur négligeables. Elle donne un angle d’entrée relatif de 52,93°, une température
-          statique de 994,8 K et une pression totale relative de 448,9 kPa.
+          vitesses et les relations thermodynamiques, en assimilant l’air à un gaz parfait et en
+          négligeant les pertes de pression totale en amont du rotor. Il en résulte un angle
+          d’entrée relatif de 52,93°, une température statique de 994,8 K et une pression totale
+          relative de 448,9 kPa.
         </p>
         <p>
           Le paramètre étudié est le rapport s/b, où s désigne le pas inter-aubes, c’est-à-dire la
           distance entre deux points homologues d’aubes voisines, et b la corde axiale, fixée à 33
-          mm. Pour les profils utilisés, la corde et la corde axiale sont égales. Le critère de
-          Zweifel, avec un coefficient de charge de 0,8, donne une première estimation de s/b =
-          0,416, soit un pas de 13,7 mm.
+          mm. Le critère de Zweifel, avec un coefficient de charge de 0,8, donne une première
+          estimation du ratio optimal s/b = 0,416, soit un pas de 13,7 mm.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure class="geometry">
@@ -72,15 +73,14 @@
         <p>
           Les composantes de vitesse relative et la température statique sont imposées à l’entrée.
           La pression statique de sortie est ajustée pour retrouver la pression totale relative
-          calculée lors de l’analyse préliminaire. Cette procédure est appliquée aux six rapports
-          s/b : 0,30 ; 0,35 ; 0,40 ; 0,45 ; 0,50 et 0,60.
+          calculée lors de l’analyse préliminaire. Cette procédure est appliquée aux six ratios s/b
+          étudiés : 0,30 ; 0,35 ; 0,40 ; 0,45 ; 0,50 et 0,60.
         </p>
         <details>
           <summary>Voir le maillage</summary>
           <p>
-            Le maillage est polygonal, avec des couches prismatiques près des aubes. Les résidus
-            décroissent puis se stabilisent, avec de faibles oscillations pour les pas les plus
-            élevés.
+            Le maillage est polygonal, avec des couches prismatiques près des aubes pour capturer le
+            comportement des couches limites.
           </p>
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure class="">
@@ -118,9 +118,11 @@
           <sub>3</sub>
           )
         </div>
+        <h3>Évolution des pertes</h3>
         <p>
-          La CFD et la corrélation d’Ainley-Mathieson présentent la même tendance : les pertes
-          diminuent d’abord lorsque le pas augmente, puis remontent au-delà de la zone de minimum.
+          La CFD et la corrélation d’Ainley-Mathieson présentent la même tendance générale : les
+          pertes diminuent d’abord avec l'augmentation du pas, jusqu'à atteindre un minimum, puis
+          remontent.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure class="">
@@ -133,10 +135,8 @@
         </figure>
         <p>
           Parmi les cas testés, s/b = 0,45 donne les pertes les plus faibles dans les deux approches
-          : Y<sub>P</sub> = 0,0893 en CFD et 0,0955 avec la corrélation, soit un écart de −6,5 %. La
-          zone de faibles pertes autour de 0,40–0,45 est cohérente avec l’estimation de Zweifel à
-          0,416. Les six points étudiés ne permettent toutefois pas de localiser plus précisément le
-          minimum.
+          : YP = 0,0893 pour la CFD et 0,0955 avec la corrélation. La zone de faibles pertes autour
+          de 0,40–0,45 est cohérente avec l’estimation de Zweifel d'un optimum en 0,416.
         </p>
         <details>
           <summary>Tableau des résultats numériques</summary>
@@ -145,7 +145,7 @@
               <thead>
                 <tr>
                   <th>s/b</th>
-                  <th>Pas (mm)</th>
+                  <th>s (mm)</th>
                   <th>Y<sub>P</sub> A-M</th>
                   <th>Y<sub>P</sub> CFD</th>
                   <th>Mach relatif en sortie</th>
@@ -198,7 +198,7 @@
             </table>
           </div>
           <p class="technical">
-            Le rapport épaisseur/corde varie également avec les profils générés ; sa correction est
+            Le rapport épaisseur/corde varie également avec les profils générés. Une correction est
             prise en compte dans l’estimation d’Ainley-Mathieson.
           </p>
         </details>
@@ -208,9 +208,9 @@
         <h2>Pertes pour de grandes valeurs du pas inter-aubes</h2>
         <p>
           Les champs de Mach permettent de comparer le cas à faibles pertes, s/b = 0,45, et le cas
-          s/b = 0,60. Dans le premier, l’écoulement accélère localement puis ralentit en aval. Dans
-          le second, les vitesses restent élevées à la sortie : le Mach relatif passe de 0,599 à
-          0,914.
+          s/b = 0,60. Dans le premier cas, l’écoulement accélère au voisinage de la partie la plus
+          courbée de l’aube, puis ralentit en aval. Dans le second, les vitesses restent élevées à
+          la sortie : le Mach relatif passe de 0,599 à 0,914.
         </p>
         <div class="pair">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
@@ -218,14 +218,14 @@
             <button class="zoom" data-image="assets/contour_mach_ratio045.png" aria-label="Agrandir : Mach relatif pour s/b = 0,45">
               <img src="assets/contour_mach_ratio045.png" alt="Mach relatif pour s/b = 0,45" loading="lazy">
             </button>
-            <figcaption>Mach relatif - s/b = 0,45</figcaption>
+            <figcaption>Mach relatif pour s/b = 0,45</figcaption>
           </figure>
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure class="">
             <button class="zoom" data-image="assets/contour_mach_ratio06.png" aria-label="Agrandir : Mach relatif pour s/b = 0,60">
               <img src="assets/contour_mach_ratio06.png" alt="Mach relatif pour s/b = 0,60" loading="lazy">
             </button>
-            <figcaption>Mach relatif - s/b = 0,60</figcaption>
+            <figcaption>Mach relatif pour s/b = 0,60</figcaption>
           </figure>
         </div>
         <p>
@@ -234,11 +234,10 @@
           contre 0,1075 avec la corrélation.
         </p>
         <p>
-          À angles d’écoulement comparables, augmenter le pas accroît la charge aérodynamique
-          supportée par chaque aube : un passage plus large lui confie davantage de débit à dévier.
-          Une charge trop élevée favorise le décollement et les pertes. Réduire le pas répartit
-          cette charge sur davantage d’aubes, mais un espacement trop faible accroît aussi les
-          pertes par frottement. Le minimum observé traduit ce compromis.
+          Pour un même angle relatif en entrée, augmenter le pas accroît le débit que chaque aube
+          doit dévier. Une charge trop élevée favorise le décollement et les pertes. Réduire le pas
+          répartit cette charge sur davantage d’aubes, mais un espacement trop faible accroît aussi
+          les pertes par frottement. Le minimum observé traduit ce compromis.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure class="">
@@ -252,16 +251,17 @@
       <section class="project-section">
         <h2>Portée des résultats</h2>
         <p>
-          La comparaison situe une zone de faibles pertes autour de s/b = 0,40–0,45. À grand pas,
-          l’écart entre CFD et corrélation augmente nettement. Le cas à 0,60 s’éloigne notamment du
-          domaine de Mach inférieur à 0,6 indiqué pour la corrélation utilisée ; il ne constitue
-          donc pas une comparaison dans les mêmes conditions de validité.
+          La comparaison met en évidence une zone de faibles pertes autour de s/b = 0,40-0,45, ce
+          qui est cohérent avec le critère de Zweifel. Pour de grands pas, l’écart entre la CFD et
+          la corrélation augmente nettement. Dans le cas s/b = 0,60, l'accroissement du Mach en
+          sortie dû au décollement l'éloigne de la zone de validité de la corrélation ce qui
+          explique l'écart observé.
         </p>
         <p>
-          Le modèle reste une grille idéale bidimensionnelle et stationnaire. Il ne représente pas
-          les effets tridimensionnels d’un rotor réel. Les résultats permettent de comparer les
-          configurations étudiées, sans constituer une validation expérimentale ni une optimisation
-          complète d’une turbine.
+          Le modèle reste une grille idéale bidimensionnelle. Il ne prend pas en compte les effets
+          tridimensionnels d’un rotor réel. Les résultats permettent de comparer les configurations
+          étudiées, sans constituer une validation expérimentale ni une optimisation complète d’un
+          étage de turbine.
         </p>
         <p class="technical">
           Référence utilisée pour les critères et corrélations : S. L. Dixon et C. A. Hall, <i>Fluid
@@ -279,3 +279,4 @@
     </script>
   </body>
 </html>
+

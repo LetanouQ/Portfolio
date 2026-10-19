@@ -29,10 +29,9 @@
         <div class="intro">
           <p>
             Dans le cadre du cours Heat and Power Systems Engineering à Chalmers en 2026, j’ai
-            réalisé sous EBSILON Professional les modèles présentés ici et leurs analyses de
-            sensibilité. L’étude part d’une turbine à gaz, puis ajoute un cycle vapeur de
-            récupération, un préchauffage régénératif et une production de chaleur. Les
-            configurations s’appuient sur un modèle pédagogique inspiré de la centrale de Rya.
+            réalisé sous EBSILON Professional les modèles suivants et leurs analyses de sensibilité.
+            L’étude part d’une turbine à gaz, puis ajoute un cycle vapeur combiné, un préchauffage
+            régénératif et la production de chaleur.
           </p>
         </div>
       </section>
@@ -42,7 +41,7 @@
         <p>
           Le cycle ouvert associe un compresseur, une chambre de combustion et une turbine
           entraînant le compresseur et l’alternateur. La température d’entrée turbine est fixée à 1
-          200 °C. Une partie importante du travail de détente est consommée par la compression de
+          200 °C. Une partie importante du travail de la turbine est consommée par la compression de
           l’air.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
@@ -50,42 +49,41 @@
           <button class="zoom" data-image="assets/simple.png" aria-label="Agrandir : Modèle de turbine à gaz sous EBSILON">
             <img src="assets/simple.png" alt="Modèle de turbine à gaz sous EBSILON" loading="lazy">
           </button>
-          <figcaption>
-            Cycle Brayton simple, rendements isentropiques du compresseur et de la turbine de 0,8,
-            rendement électrique de 22,5 %
-          </figcaption>
+          <figcaption>Cycle Brayton simple</figcaption>
         </figure>
         <p>
           Le rapport de compression a été varié de 5 à 40, pour un débit d’air de 390 kg/s et une
-          pression de sortie turbine de 1,2 bar. Deux cas sont comparés : des rendements
-          isentropiques égaux à 1 pour le compresseur et la turbine, puis égaux à 0,8.
+          pression de sortie turbine de 1,2 bar. Deux cas ont été comparés : des rendements
+          isentropiques égaux à 1 puis 0,8 pour le compresseur et la turbine.
         </p>
         <div class="pair">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure>
-            <button class="zoom" data-image="assets/compression.svg" aria-label="Agrandir : Rendement électrique pour deux rendements isentropiques">
-              <img src="assets/compression.svg" alt="Rendement électrique pour deux rendements isentropiques" loading="lazy">
+            <button class="zoom" data-image="assets/graphe-1.png" aria-label="Agrandir : Rendement électrique pour deux rendements isentropiques">
+              <img src="assets/graphe-1.png" alt="Rendement électrique pour deux rendements isentropiques" loading="lazy">
             </button>
             <figcaption>Influence du rapport de compression sur le rendement</figcaption>
           </figure>
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure>
-            <button class="zoom" data-image="assets/puissance.svg" aria-label="Agrandir : Puissance électrique pour deux rendements isentropiques">
-              <img src="assets/puissance.svg" alt="Puissance électrique pour deux rendements isentropiques" loading="lazy">
+            <button class="zoom" data-image="assets/graphe-2.png" aria-label="Agrandir : Puissance électrique pour deux rendements isentropiques">
+              <img src="assets/graphe-2.png" alt="Puissance électrique pour deux rendements isentropiques" loading="lazy">
             </button>
             <figcaption>Influence du rapport de compression sur la puissance</figcaption>
           </figure>
         </div>
         <p>
           Avec des transformations isentropiques, le rendement augmente sur la plage étudiée, tandis
-          que la puissance atteint un maximum parmi les points testés à un rapport de 20. Avec des
-          rendements isentropiques de 0,8, le meilleur rendement testé est de 22,4 % à un rapport de
-          15, mais la puissance maximale est obtenue à un rapport de 10, avec environ 88,0 MW.
+          que la puissance atteint un maximum parmi les points testés pour un taux de compression de
+          20. Avec des rendements isentropiques de 0,8, le meilleur rendement testé est de 22,5 %
+          pour un rapport de 15, mais la puissance maximale est obtenue à un rapport de 10, avec
+          environ 88,0 MW.
         </p>
         <p>
           Le rapport de compression qui maximise la puissance n’est donc pas nécessairement celui
           qui maximise le rendement. Lorsque les pertes sont prises en compte, le travail
-          supplémentaire demandé au compresseur pénalise fortement le bilan aux rapports élevés.
+          supplémentaire demandé au compresseur pénalise fortement le bilan pour des rapports
+          élevés.
         </p>
       </section>
       <!-- SECTION : Cycle combiné et postcombustion -->
@@ -105,16 +103,14 @@
           <figcaption>Modèle 2 - Cycle combiné avec chaudière de récupération</figcaption>
         </figure>
         <p>
-          Dans l’étude de sensibilité, porter la température après postcombustion de 600 à 1 000 °C
-          fait passer la puissance électrique de 198,3 à 312,2 MW. Le rendement électrique sur PCI
-          augmente plus modérément, de 49,76 à 51,18 %. Cette évolution est propre à la
-          configuration et aux conditions imposées dans ce modèle.
+          Augmenter la température des gaz après postcombustion de 600 à 1 000 °C fait passer la
+          puissance électrique de 198,3 à 312,2 MW. Le rendement électrique sur PCI (pouvoir
+          calorifique inférieur) augmente également de 49,76 à 51,18 %.
         </p>
         <p>
-          La postcombustion permet aussi de respecter la consigne de vapeur surchauffée à 545 °C.
-          Sans elle, les gaz sortant de la turbine à 538 °C ne peuvent pas chauffer la vapeur à
-          cette température. Il faut alors abaisser la consigne de vapeur et adapter le
-          fonctionnement du cycle de récupération.
+          La postcombustion permet en particulier de porter la température de la vapeur à 545 °C.
+          Augmenter la température de vapeur vive est un levier important d’augmentation de la
+          puissance et du rendement d'un cycle Rankine.
         </p>
         <details>
           <summary>Tableau des résultats de postcombustion</summary>
@@ -163,8 +159,8 @@
         <h2>Préchauffage régénératif basse pression</h2>
         <p>
           Une modification du cycle combiné consiste à ajouter un soutirage basse pression et un
-          réchauffeur fermé en amont du dégazeur. L’objectif est de répartir le préchauffage de
-          l’eau en utilisant de la vapeur ayant déjà effectué une détente plus importante.
+          réchauffeur fermé en amont du dégazeur. L’objectif est de réchauffer l'eau avec de la
+          vapeur ayant effectué une plus grande partie de sa détente.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -174,25 +170,20 @@
           <figcaption>Modèle 3 - Ajout d’un préchauffage régénératif basse pression</figcaption>
         </figure>
         <p>
-          La température d’eau après ce réchauffeur varie de 30 à 90 °C. Le meilleur point testé est
-          obtenu à 57 °C : le rendement passe de 51,049 % pour la référence à 51,312 %, soit un gain
-          d’environ 0,264 point, ou 0,52 % en relatif.
+          La température d’eau après ce réchauffeur a été variée de 30 à 90 °C. Le meilleur point
+          testé est obtenu à 57 °C : le rendement passe de 51,05 % pour la référence à 51,31 %, soit
+          un gain d’environ 0,26 point, ou 0,52 % en relatif.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
-          <button class="zoom" data-image="assets/prechauffage.svg" aria-label="Agrandir : Rendement électrique en fonction de la température de préchauffage">
-            <img src="assets/prechauffage.svg" alt="Rendement électrique en fonction de la température de préchauffage" loading="lazy">
+          <button class="zoom" data-image="assets/graphe-3.png" aria-label="Agrandir : Rendement électrique en fonction de la température de préchauffage">
+            <img src="assets/graphe-3.png" alt="Rendement électrique en fonction de la température de préchauffage" loading="lazy">
           </button>
           <figcaption>Comparaison du cycle modifié à la configuration de référence</figcaption>
         </figure>
         <p>
-          Le gain reste limité et ne suffit pas, à lui seul, à justifier l’ajout des équipements.
-          L’intérêt de la modification dépendrait aussi du coût du réchauffeur, des auxiliaires et
-          de la durée annuelle de fonctionnement. L’étude permet ici d’identifier une plage
-          favorable parmi les températures testées.
-        </p>
-        <p class="technical">
-          Les rendements sont exprimés sur le pouvoir calorifique inférieur du combustible.
+          Le gain modéré induit par cette modification ne justifie pas nécessairement le coût
+          d'ajout des équipements.
         </p>
       </section>
       <!-- SECTION : Cogénération -->
@@ -201,8 +192,7 @@
         <p>
           La configuration de cogénération récupère de la chaleur sur les fumées et par soutirage de
           vapeur. Le réseau de chauffage est alimenté à 90 °C, avec un retour à 40 °C. Le modèle
-          conserve un condenseur refroidi par eau et représente une simplification de l’installation
-          réelle.
+          conserve un condenseur refroidi par eau.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -210,23 +200,23 @@
             <img src="assets/cogeneration.png" alt="Cycle combiné avec réseau de chaleur" loading="lazy">
           </button>
           <figcaption>
-            Modèle 4 - Cogénération , capture à une demande de chaleur de 250 MW
+            Modèle 4 - Cogénération, capture pour une demande de chaleur de 250 MW
           </figcaption>
         </figure>
         <p>
-          Lorsque la demande de chaleur passe de 50 à 294 MW, le rendement électrique sur PCI
-          diminue de 50,06 à 43,69 %, tandis que le rendement global, électricité et chaleur utile
-          comprises, augmente de 58,70 à 94,50 %. La production de chaleur valorise davantage
-          l’énergie du combustible, mais réduit la détente disponible pour produire de
-          l’électricité.
+          Lorsque la demande de chaleur passe de 50 à 294 MW, le rendement électrique diminue de
+          50,06 à 43,69 %, tandis que le rendement global, électricité et chaleur utile comprises,
+          augmente de 58,70 à 94,50 %. La production de chaleur valorise davantage l’énergie du
+          combustible, mais réduit la détente disponible pour produire de l’électricité dans le
+          cycle vapeur.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
-          <button class="zoom" data-image="assets/chaleur.svg" aria-label="Agrandir : Rendements électrique et global en fonction de la demande de chaleur">
-            <img src="assets/chaleur.svg" alt="Rendements électrique et global en fonction de la demande de chaleur" loading="lazy">
+          <button class="zoom" data-image="assets/graphe-4.png" aria-label="Agrandir : Rendements électrique et global en fonction de la demande de chaleur">
+            <img src="assets/graphe-4.png" alt="Rendements électrique et global en fonction de la demande de chaleur" loading="lazy">
           </button>
           <figcaption>
-            Cogénération - Rendements calculés sur le pouvoir calorifique inférieur du combustible
+            Rendements électrique et global en fonction de la demande de chaleur
           </figcaption>
         </figure>
       </section>
@@ -241,3 +231,4 @@
     </script>
   </body>
 </html>
+
