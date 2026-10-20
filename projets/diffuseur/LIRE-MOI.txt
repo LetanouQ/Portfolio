@@ -1,0 +1,5 @@
+Ouvrir index.html dans un navigateur. Conserver style.css, script.js et assets à côté.
+Le texte se modifie dans index.html. Les images sont agrandissables au clic.
+
+Aucun nouveau calcul de simulation : figures et valeurs tirées du rapport fourni.
+Projet collectif : contribution partagée, sans attribution individuelle des étapes. Le modèle de turbulence précis n’est pas identifié dans le texte fourni. L’eau est spécifiée dans l’énoncé, malgré le titre évoquant une éolienne. Les valeurs de puissance sont celles du rapport, non recalculées à partir des fichiers Fluent.

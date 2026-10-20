@@ -28,11 +28,10 @@
         <h1>Étude CFD d’un diffuseur pour turbine</h1>
         <div class="intro">
           <p>
-            Ce projet réalisé en binôme à l’ENSE3 en 2026 compare deux stratégies de maillage pour
-            une simulation RANS sous ANSYS Fluent. Le cas étudié est un diffuseur pour turbine
-            hydraulique. Le travail porte sur la sensibilité numérique, la comparaison entre
-            maillage non structuré et overset, puis l’ajout d’un disque d’action représentant la
-            turbine.
+            Ce projet réalisé en binôme à l’ENSE3 en 2026 étudie l’écoulement dans un diffuseur pour
+            turbine hydraulique sous ANSYS Fluent. Deux approches de maillage, non structuré et
+            overset, sont comparées avant d’introduire la turbine sous forme d’un disque d’action
+            pour estimer la puissance extraite.
           </p>
         </div>
       </section>
@@ -41,9 +40,8 @@
         <h2>Géométrie et modèle numérique</h2>
         <p>
           Le diffuseur est une géométrie de révolution représentée par deux profils dans un plan
-          méridien. Il entoure l’emplacement d’une turbine de rayon 0,8 m. La simulation RANS est
-          menée en 2D axisymétrique sous ANSYS Fluent, dans un écoulement d’eau : elle représente la
-          géométrie tridimensionnelle par rotation autour de l’axe.
+          méridien. Il entoure une turbine de rayon 0,8 m. La simulation RANS est menée en 2D
+          axisymétrique sous ANSYS Fluent.
         </p>
         <p>
           Une vitesse axiale de 3 m/s est imposée aux frontières amont et extérieure du domaine. La
@@ -62,16 +60,16 @@
           </figcaption>
         </figure>
       </section>
-      <!-- SECTION : Sensibilité au domaine et au maillage non structuré -->
+      <!-- SECTION : Configuration du calcul non structuré -->
       <section class="project-section">
-        <h2>Sensibilité au domaine et au maillage non structuré</h2>
+        <h2>Configuration du calcul non structuré</h2>
         <p>
-          La première approche utilise un maillage non structuré, avec un raffinement autour des
-          profils et des couches près des parois. La taille du domaine est d’abord augmentée, puis
-          trois paramètres sont étudiés séparément : la taille des cellules au loin, celle de la
-          zone raffinée et le taux de croissance.
+          Une étude préalable de la taille du domaine et des paramètres de maillage a permis de
+          retenir une configuration offrant un compromis entre précision et coût de calcul. Le
+          domaine mesure 27 m × 7,5 m. Le maillage non structuré est raffiné près des profils, avec
+          des couches d’inflation au voisinage des parois.
         </p>
-        <div class="pair">
+        <div class="mesh-preview" style="max-width:760px;margin:24px auto">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
           <figure>
             <button class="zoom" data-image="assets/malha_perfil_geral.png" aria-label="Agrandir : Maillage non structuré au voisinage des profils">
@@ -79,33 +77,16 @@
             </button>
             <figcaption>Maillage non structuré au voisinage des profils</figcaption>
           </figure>
-          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
-          <figure>
-            <button class="zoom" data-image="assets/convergenceDominio.png" aria-label="Agrandir : Écart de débit par rapport au plus grand domaine testé">
-              <img src="assets/convergenceDominio.png" alt="Écart de débit par rapport au plus grand domaine testé" loading="lazy">
-            </button>
-            <figcaption>Écart de débit par rapport au plus grand domaine testé</figcaption>
-          </figure>
         </div>
-        <p>
-          Ces comparaisons évaluent la sensibilité du débit aux choix numériques. La convergence de
-          cette grandeur globale ne garantit pas la même précision sur les détails locaux de
-          l’écoulement.
-        </p>
-        <p>
-          L’agrandissement du domaine fait passer le débit d’environ 11 860 à 12 000 kg/s. Le
-          domaine retenu donne environ 11 945 kg/s, soit un écart de 0,46 % avec le plus grand
-          domaine testé. Le raffinement du maillage modifie également le débit de moins de 1 % dans
-          les configurations comparées.
-        </p>
       </section>
       <!-- SECTION : Maillage overset et comparaison des résultats -->
       <section class="project-section">
         <h2>Maillage overset et comparaison des résultats</h2>
         <p>
-          La seconde approche superpose un maillage de fond et deux maillages ajustés aux profils.
-          Elle permet de construire séparément les différentes zones, puis d’échanger les
-          informations par interpolation dans les régions de recouvrement.
+          L’approche overset superpose un maillage de fond et deux maillages ajustés aux profils.
+          L’ensemble compte 25 844 cellules, soit près du double du maillage non structuré, mais une
+          partie des cellules masquées est désactivée pour le calcul. Les informations sont
+          échangées par interpolation dans les zones de recouvrement.
         </p>
         <div class="pair">
           <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
@@ -123,13 +104,16 @@
             <figcaption>Maillage overset du profil secondaire</figcaption>
           </figure>
         </div>
-        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
-        <figure>
-          <button class="zoom" data-image="assets/celltype_new.png" aria-label="Agrandir : Zones de calcul et d’interpolation entre les maillages">
-            <img src="assets/celltype_new.png" alt="Zones de calcul et d’interpolation entre les maillages" loading="lazy">
-          </button>
-          <figcaption>Zones de calcul et d’interpolation entre les maillages</figcaption>
-        </figure>
+        <details>
+          <summary>Voir les zones d’interpolation</summary>
+          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+          <figure>
+            <button class="zoom" data-image="assets/celltype_new.png" aria-label="Agrandir : Zones de calcul et d’interpolation entre les maillages">
+              <img src="assets/celltype_new.png" alt="Zones de calcul et d’interpolation entre les maillages" loading="lazy">
+            </button>
+            <figcaption>Zones de calcul et d’interpolation entre les maillages</figcaption>
+          </figure>
+        </details>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
           <button class="zoom" data-image="assets/velocity_overset.png" aria-label="Agrandir : Champ de vitesse avec le maillage overset">
@@ -138,26 +122,21 @@
           <figcaption>Champ de vitesse avec le maillage overset</figcaption>
         </figure>
         <p>
-          Les champs présentent les mêmes tendances générales. Le maillage overset comprend 25 844
-          cellules avant désactivation des zones masquées. Le débit calculé atteint 13 002 kg/s,
-          avec un écart de 8,7 % par rapport à la référence non structurée utilisée pour cette
-          comparaison. Des discontinuités sont visibles près des interfaces ; les interpolations
-          constituent une piste d’explication, sans être la seule différence entre les deux
-          discrétisations.
+          Les deux approches reproduisent les mêmes tendances générales de l’écoulement. Le calcul
+          overset donne toutefois un débit de 13 002 kg/s, supérieur de 8,7 % à celui obtenu avec le
+          maillage non structuré. Les discontinuités visibles aux interfaces illustrent la
+          difficulté d’assurer la continuité entre les maillages superposés et l’importance de
+          conserver des tailles de cellules proches dans les zones d’interpolation.
         </p>
-        <p>
-          Pour cette géométrie fixe, le maillage non structuré offre ici le compromis retenu. La
-          comparaison overset constitue une vérification complémentaire, pas une validation
-          expérimentale.
-        </p>
+        <p>Le maillage non structuré a été conservé pour la suite de l’étude avec la turbine.</p>
       </section>
       <!-- SECTION : Modélisation de la turbine par disque d’action -->
       <section class="project-section">
         <h2>Modélisation de la turbine par disque d’action</h2>
         <p>
-          La turbine est ensuite introduite sous la forme d’un disque d’action imposant un saut de
-          pression. Cette représentation permet d’estimer l’extraction d’énergie sans modéliser les
-          pales ni leur rotation.
+          Le modèle avec turbine utilise le maillage non structuré. La turbine est introduite sous
+          la forme d’un disque d’action imposant un saut de pression. Cette représentation permet
+          d’estimer l’extraction d’énergie sans modéliser les pales ni leur rotation.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -167,15 +146,8 @@
           <figcaption>Diffuseur avec disque d’action - Sillage de la turbine</figcaption>
         </figure>
         <p>
-          Le calcul donne un coefficient de puissance de 0,87, normalisé par la surface du rotor et
-          la vitesse amont, soit environ 23,6 kW dans les conditions étudiées. Cette valeur concerne
-          le modèle de turbine carénée et cette surface de référence ; elle ne représente pas un
-          rendement global de l’installation.
-        </p>
-        <p>
-          La sensibilité du coefficient de puissance au maillage n’a pas été étudiée aussi
-          complètement que le débit du diffuseur seul. Une vérification dédiée serait nécessaire
-          avant d’utiliser cette estimation pour comparer des performances.
+          Le modèle avec disque d’action donne une puissance extraite d’environ 23,6 kW, soit un
+          coefficient de puissance de 0,87 rapporté à la surface du rotor et à la vitesse amont.
         </p>
       </section>
     </main>
