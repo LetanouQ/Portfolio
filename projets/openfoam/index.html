@@ -28,11 +28,11 @@
         <h1>Écoulement autour d’un cylindre sous OpenFOAM</h1>
         <div class="intro">
           <p>
-            Ce bureau d’étude réalisé à l’ENSE3 porte sur un écoulement laminaire bidimensionnel
-            autour d’un cylindre. Les simulations à Reynolds 20, 40 et 60 permettent de comparer les
-            sillages stationnaires et le détachement périodique de tourbillons. L’étude examine
-            aussi l’influence du maillage, du schéma de convection et du pas de temps sur les
-            résultats.
+            Ce bureau d’étude réalisé à l’ENSE3 en 2025 porte sur un écoulement laminaire
+            bidimensionnel autour d’un cylindre. Les simulations à Reynolds 20, 40 et 60 permettent
+            de comparer les sillages stationnaires et le détachement périodique de tourbillons.
+            L’étude examine aussi l’influence du maillage, du schéma de convection et du pas de
+            temps sur les résultats.
           </p>
         </div>
       </section>
@@ -40,10 +40,9 @@
       <section class="project-section">
         <h2>Le modèle numérique</h2>
         <p>
-          Les calculs sont réalisés avec le solveur incompressible icoFoam, sans modèle de
-          turbulence. Le diamètre du cylindre D et la vitesse à l’infini U sont fixés respectivement
-          à 1 m et 1 m/s. La viscosité cinématique est ajustée pour obtenir le nombre de Reynolds
-          souhaité.
+          Les calculs sont réalisés avec le solveur incompressible icoFoam. Le diamètre du cylindre
+          D et la vitesse à l’infini U sont fixés respectivement à 1 m et 1 m/s. La viscosité
+          cinématique est ajustée pour contrôler le nombre de Reynolds avec :
         </p>
         <div class="equation">
           Re = UD / ν
@@ -53,7 +52,7 @@
           amont du domaine, une pression de référence sur la moitié aval et une condition de
           non-glissement sur le cylindre. Une étude initiale de la taille du domaine a été menée
           pour limiter l’influence des frontières sur le résultat. Le diamètre extérieur retenu est
-          de 40D. Trois maillages de 2 080, 8 160 et 32 320 cellules sont ensuite comparés.
+          de 40D. Trois maillages de 2 080, 8 160 et 32 320 cellules ont été ensuite comparés.
         </p>
         <details>
           <summary>Voir le maillage</summary>
@@ -131,13 +130,16 @@
           </div>
         </details>
         <p>
-          Cette faible variation du résultat centré ne suffit pas, à elle seule, à valider le calcul
-          : la valeur obtenue reste supérieure à la référence retenue.
+          Sur le maillage fin, le schéma centré donne un coefficient de traînée de 2,345 à Re = 20,
+          contre une valeur de référence de 2,10. À Re = 40, il donne 1,749 contre 1,55. La
+          diminution de la traînée avec le nombre de Reynolds est bien retrouvée. Les résultats
+          centrés varient peu avec le raffinement, mais restent supérieurs aux références d’environ
+          12 et 13 % respectivement.
         </p>
       </section>
-      <!-- SECTION : Les allées de von Kármán à Reynolds 60 -->
+      <!-- SECTION : Allées de von Kármán à Reynolds 60 -->
       <section class="project-section">
-        <h2>Les allées de von Kármán à Reynolds 60</h2>
+        <h2>Allées de von Kármán à Reynolds 60</h2>
         <p>
           À Reynolds 60, le sillage devient instationnaire sur les deux maillages les plus fins avec
           le schéma centré. Le détachement alterné des tourbillons s’accompagne d’une oscillation
@@ -151,13 +153,12 @@
           <figcaption>Re = 60 - Champ instantané de la norme de la vitesse en m/s</figcaption>
         </figure>
         <p>
-          Sur le maillage de 32 320 cellules, le pas de temps est réduit de 0,02 à 0,01 s, avec un
-          nombre de Courant maximal d’environ 0,6 dans le second calcul. Le coefficient de traînée
-          moyen passe de 1,590 à 1,596. Le maillage le plus grossier ne fait pas apparaître de
+          Ces oscillations périodiques sont visibles sur le graphe du coefficient de traînée pour
+          les deux maillages les plus fins. Le maillage le plus grossier ne fait pas apparaître de
           détachement périodique sur la durée simulée.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
-        <figure class="">
+        <figure class="" style="max-width:680px;margin:24px auto">
           <button class="zoom" data-image="assets/zoom_60.png" aria-label="Agrandir : Oscillations périodiques du coefficient de traînée">
             <img src="assets/zoom_60.png" alt="Oscillations périodiques du coefficient de traînée" loading="lazy">
           </button>
@@ -167,23 +168,24 @@
         <p>
           La période des oscillations de traînée est d’environ 3,7 s. La traînée oscille deux fois
           plus vite que le détachement alterné des tourbillons : la période de détachement déduite
-          est donc de 7,4 s. On obtient St = fD/U ≈ 0,135, en accord avec la valeur de référence
-          d’environ 0,14.
+          est donc de 7,4 s. On obtient un nombre de Strouhal St = fD/U ≈ 0,135, en accord avec la
+          valeur de référence de 0,14.
         </p>
         <p>
-          Avec le schéma upwind, le calcul sur le même maillage fin reste stationnaire dans les
-          conditions étudiées, avec un coefficient de traînée de 1,636. La comparaison montre que le
-          choix du schéma influence aussi la restitution de l’instationnarité, au-delà de la seule
-          valeur moyenne de la traînée.
+          Avec le schéma upwind, le calcul reste stationnaire dans les conditions étudiées. Sur le
+          maillage fin, le coefficient de traînée vaut 1,636. Le choix du schéma spatial est ainsi
+          crucial pour capturer les phénomènes instationnaires.
         </p>
       </section>
       <!-- SECTION : Comparaison de la traînée -->
       <section class="project-section">
         <h2>Comparaison de la traînée</h2>
         <p>
-          Sur le maillage fin, les coefficients obtenus avec le schéma centré diminuent lorsque le
-          nombre de Reynolds augmente. Ils restent environ 12 à 14 % au-dessus des valeurs de
-          référence relevées dans le rapport.
+          Même avec le maillage fin et le schéma centré, les coefficients de traînée estimés restent
+          12 à 14% supérieurs aux valeurs de référence. Réduire cet écart nécessiterait une étude
+          plus poussée sur la taille du domaine, le maillage et le choix des conditions limites.
+          Cette étude met néanmoins en évidence l'impact des choix numériques sur la traînée et le
+          détachement tourbillonnaire.
         </p>
         <details>
           <summary>Tableau des coefficients de traînée</summary>
@@ -193,7 +195,7 @@
                 <tr>
                   <th scope="col">Reynolds</th>
                   <th scope="col">C<sub>D</sub> calculé</th>
-                  <th scope="col">Référence approximative</th>
+                  <th scope="col">Valeur de référence</th>
                 </tr>
               </thead>
               <tbody>
@@ -216,13 +218,6 @@
             </table>
           </div>
         </details>
-        <p>
-          Les simulations reproduisent les régimes d’écoulement attendus, mais cet écart persistant
-          demanderait une vérification complémentaire des conditions aux limites, du calcul des
-          efforts et de la taille du domaine. L’étude permet surtout de comparer les choix
-          numériques et leur influence sur le sillage ; elle ne constitue pas une validation
-          quantitative complète.
-        </p>
       </section>
     </main>
     <dialog id="lightbox">
@@ -235,3 +230,4 @@
     </script>
   </body>
 </html>
+

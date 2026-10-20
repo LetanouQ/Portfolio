@@ -28,22 +28,29 @@
         <h1>Étude CFD d’un diffuseur pour turbine</h1>
         <div class="intro">
           <p>
-            Ce projet réalisé en binôme à l’ENSE3 compare deux stratégies de maillage pour une
-            simulation RANS sous ANSYS Fluent. Le cas étudié est un diffuseur pour turbine
-            hydraulique, dans un écoulement d’eau. Le travail porte sur la sensibilité numérique, la
-            comparaison entre maillage non structuré et overset, puis l’ajout d’un disque d’action
-            représentant la turbine.
+            Ce projet réalisé en binôme à l’ENSE3 en 2026 compare deux stratégies de maillage pour
+            une simulation RANS sous ANSYS Fluent. Le cas étudié est un diffuseur pour turbine
+            hydraulique. Le travail porte sur la sensibilité numérique, la comparaison entre
+            maillage non structuré et overset, puis l’ajout d’un disque d’action représentant la
+            turbine.
           </p>
         </div>
       </section>
-      <!-- SECTION : Géométrie et champ de vitesse -->
+      <!-- SECTION : Géométrie et modèle numérique -->
       <section class="project-section">
-        <h2>Géométrie et champ de vitesse</h2>
+        <h2>Géométrie et modèle numérique</h2>
         <p>
-          Le diffuseur comporte deux profils et entoure une turbine de rayon 0,8 m. Le calcul est
-          axisymétrique, avec une vitesse amont de 3 m/s. Dans un premier temps, le diffuseur est
-          étudié seul : le débit à son entrée sert de grandeur de comparaison pour les choix de
-          domaine et de maillage.
+          Le diffuseur est une géométrie de révolution représentée par deux profils dans un plan
+          méridien. Il entoure l’emplacement d’une turbine de rayon 0,8 m. La simulation RANS est
+          menée en 2D axisymétrique sous ANSYS Fluent, dans un écoulement d’eau : elle représente la
+          géométrie tridimensionnelle par rotation autour de l’axe.
+        </p>
+        <p>
+          Une vitesse axiale de 3 m/s est imposée aux frontières amont et extérieure du domaine. La
+          frontière aval est une sortie en pression et les profils du diffuseur sont des parois
+          fixes. Le diffuseur est d’abord étudié sans turbine : le débit massique traversant son
+          entrée sert à comparer les tailles de domaine et les maillages. La turbine est ensuite
+          ajoutée sous forme d’un disque d’action.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -81,13 +88,9 @@
           </figure>
         </div>
         <p>
-          Le domaine retenu donne un débit à moins de 1 % de celui obtenu sur le plus grand domaine
-          testé. Une configuration de maillage moins coûteuse est conservée, les raffinements
-          supplémentaires apportant peu de changement sur cette grandeur.
-        </p>
-        <p>
-          Ces comparaisons vérifient la sensibilité de cette grandeur globale dans la plage étudiée.
-          Elles ne garantissent pas la même précision sur tous les détails locaux de l’écoulement.
+          Ces comparaisons évaluent la sensibilité du débit aux choix numériques. La convergence de
+          cette grandeur globale ne garantit pas la même précision sur les détails locaux de
+          l’écoulement.
         </p>
         <p>
           L’agrandissement du domaine fait passer le débit d’environ 11 860 à 12 000 kg/s. Le
@@ -186,3 +189,4 @@
     </script>
   </body>
 </html>
+

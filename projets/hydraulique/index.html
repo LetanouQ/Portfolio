@@ -28,10 +28,11 @@
         <h1>Coup de bélier et résonance sous MATLAB</h1>
         <div class="intro">
           <p>
-            Ce bureau d’étude porte sur les transitoires hydrauliques dans une conduite forcée. J’ai
-            développé sous MATLAB un modèle par la méthode des caractéristiques pour étudier la
-            fermeture d’une vanne, puis la réponse à une excitation périodique. L’analyse porte sur
-            les surpressions, la résonance et l’effet des pertes de charge.
+            Ce bureau d’étude, réalisé à l'ENSE3 en 2025, porte sur les transitoires hydrauliques
+            dans une conduite forcée. J’ai développé sous MATLAB un modèle par la méthode des
+            caractéristiques pour étudier la fermeture d’une vanne, puis la réponse à une excitation
+            périodique. L’analyse porte sur les surpressions, la résonance et l’effet des pertes de
+            charge.
           </p>
         </div>
       </section>
@@ -40,8 +41,8 @@
         <h2>Modèle de propagation des ondes</h2>
         <p>
           Le système comprend un réservoir à charge constante, une conduite et une vanne en aval. Le
-          modèle unidimensionnel repose sur les équations d’Allievi. Leur écriture en variables
-          caractéristiques permet de suivre deux ondes qui se propagent en sens opposés.
+          modèle unidimensionnel repose sur les équations d’Allievi. La méthode des caractéristiques
+          permet de suivre deux ondes qui se propagent en sens opposés.
         </p>
         <p>
           Le schéma est implémenté sous MATLAB, avec un pas de temps lié au pas spatial par Δt =
@@ -57,15 +58,6 @@
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
-          <button class="zoom" data-image="assets/h_sc.png" aria-label="Agrandir : Propagation et réflexion des ondes de charge - Position x′ = x/L et temps t′ = ta/L">
-            <img src="assets/h_sc.png" alt="Propagation et réflexion des ondes de charge - Position x′ = x/L et temps t′ = ta/L" loading="lazy">
-          </button>
-          <figcaption>
-            Propagation et réflexion des ondes de charge - Position x′ = x/L et temps t′ = ta/L
-          </figcaption>
-        </figure>
-        <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
-        <figure>
           <video controls loop muted playsinline preload="metadata" aria-label="Animation de la propagation du coup de bélier">
             <source src="assets/coup-de-belier-corrige.mp4" type="video/mp4">
             Votre navigateur ne lit pas cette vidéo.
@@ -78,24 +70,21 @@
       <section class="project-section">
         <h2>Surpression et durée de fermeture</h2>
         <p>
-          Le temps de fermeture est noté T′f = Tf/(L/a). Le débit initial adimensionné est q₀ =
-          aQ₀/(hᵣgS), où S est la section de la conduite et g la pesanteur. Le paramètre K′₀
-          représente la résistance initiale adimensionnée de la vanne ; dans le cas sans pertes
-          étudié ici, q₀ = 1/√K′₀. Une valeur plus élevée de K′₀ correspond donc à un débit initial
-          plus faible.
+          Le temps de fermeture est adimensionné par le temps de parcours d’une onde dans la
+          conduite : T′<sub>f</sub> = T<sub>f</sub>/(L/a). Les courbes comparent plusieurs
+          résistances initiales de vanne K′₀ : plus cette résistance est élevée, plus le débit
+          initial est faible.
         </p>
         <p>
-          L’étude fait varier le temps de fermeture et la résistance initiale de la vanne. Pour une
-          fermeture plus rapide que le temps d’aller-retour d’une onde dans la conduite, soit T′f
-          &lt; 2, la surpression maximale dépend essentiellement du débit initial. Allonger
-          davantage une fermeture déjà rapide ne réduit donc pas nécessairement le pic de charge.
+          Pour T′<sub>f</sub>&lt; 2, la fermeture est plus rapide qu’un aller-retour d’onde. La
+          surpression maximale dépend alors essentiellement du débit initial. Au-delà, une fermeture
+          plus lente réduit le pic de charge.
         </p>
         <p>
-          Le graphique ci-dessous représente (h′max − 1)/q₀ en fonction de T′f. L’ordonnée compare
-          la surpression maximale à l’échelle de charge associée au débit initial ; chaque courbe
-          correspond à une résistance initiale différente. Le plateau proche de 1 caractérise les
-          fermetures rapides. La décroissance pour T′f &gt; 2 montre l’effet d’une fermeture plus
-          lente.
+          Le graphique présente la surpression maximale normalisée (h′<sub>max</sub> − 1)/q₀, avec
+          q₀ = aQ₀/(hᵣgS) = 1/√K′₀ dans le cas sans pertes. Le plateau proche de 1 correspond aux
+          fermetures rapides ; la décroissance au-delà de T′<sub>f</sub> = 2 montre l’effet d’une
+          fermeture plus lente.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -113,19 +102,15 @@
           tendance, avec des écarts qui dépendent de la résistance initiale et de la loi de
           fermeture choisie.
         </p>
-        <p>
-          Une seconde loi de fermeture, faisant varier la résistance à la puissance quatre plutôt
-          qu’au carré, a également été testée. Elle conserve les grandes tendances, mais modifie les
-          niveaux de surpression pour les fermetures lentes.
-        </p>
       </section>
       <!-- SECTION : Résonance et pertes de charge -->
       <section class="project-section">
         <h2>Résonance et pertes de charge</h2>
         <p>
-          Une oscillation sinusoïdale de débit est ensuite imposée à la vanne. Sans pertes, la
-          réponse s’amplifie à la période adimensionnée T′ = T/(L/a) = 4, soit une fréquence F′ =
-          fL/a = 0,25. Cette période correspond à deux allers-retours des ondes dans la conduite.
+          Une oscillation sinusoïdale de débit est ensuite imposée au niveau de la vanne. Sans
+          pertes, la réponse s’amplifie à la période adimensionnée T′ = T/(L/a) = 4, soit une
+          fréquence F′ = fL/a = 0,25, ce qui correspond à deux allers-retours des ondes dans la
+          conduite.
         </p>
         <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
         <figure>
@@ -150,12 +135,6 @@
             Réponse en fréquence pour différents coefficients de pertes adimensionnés C
           </figcaption>
         </figure>
-        <p>
-          Ce modèle permet de comparer des manœuvres de vanne et d’étudier les mécanismes de
-          résonance. Il reste une représentation simplifiée de la conduite, sans traitement de la
-          cavitation ; les résultats ne constituent pas à eux seuls un dimensionnement de protection
-          contre le coup de bélier.
-        </p>
       </section>
     </main>
     <dialog id="lightbox">
@@ -168,3 +147,4 @@
     </script>
   </body>
 </html>
+
