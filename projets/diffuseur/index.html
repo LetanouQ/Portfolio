@@ -69,13 +69,18 @@
           domaine mesure 27 m × 7,5 m. Le maillage non structuré est raffiné près des profils, avec
           des couches d’inflation au voisinage des parois.
         </p>
-        <div class="mesh-preview" style="max-width:760px;margin:24px auto">
-          <!-- IMAGE : modifier src et data-image ensemble pour changer le visuel -->
+        <div class="pair">
           <figure>
-            <button class="zoom" data-image="assets/malha_perfil_geral.png" aria-label="Agrandir : Maillage non structuré au voisinage des profils">
-              <img src="assets/malha_perfil_geral.png" alt="Maillage non structuré au voisinage des profils" loading="lazy">
+            <button class="zoom" data-image="assets/finalMeshTotal.png" aria-label="Agrandir : Maillage non structuré - Vue d’ensemble du domaine">
+              <img src="assets/finalMeshTotal.png" alt="Maillage non structuré - Vue d’ensemble du domaine" loading="lazy">
             </button>
-            <figcaption>Maillage non structuré au voisinage des profils</figcaption>
+            <figcaption>Maillage non structuré - Vue d’ensemble du domaine</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom" data-image="assets/malha_perfil_geral.png" aria-label="Agrandir : Maillage non structuré - Raffinement au voisinage des profils">
+              <img src="assets/malha_perfil_geral.png" alt="Maillage non structuré - Raffinement au voisinage des profils" loading="lazy">
+            </button>
+            <figcaption>Maillage non structuré - Raffinement au voisinage des profils</figcaption>
           </figure>
         </div>
       </section>
@@ -129,6 +134,44 @@
           conserver des tailles de cellules proches dans les zones d’interpolation.
         </p>
         <p>Le maillage non structuré a été conservé pour la suite de l’étude avec la turbine.</p>
+        <!-- Qualité du maillage overset : angles et déterminants des cellules -->
+        <details>
+          <summary>Qualité du maillage overset</summary>
+          <p>
+            Les angles des cellules restent supérieurs à 34° et les déterminants 2×2×2
+            supérieurs à 0,82. Ces critères complètent le contrôle de la résolution près des parois.
+            Le y<sup>+</sup> a été vérifié : il reste inférieur à 2 sur la quasi-totalité
+            des profils, avec quelques pics très localisés autour de 2,3 à 2,4 au bord de fuite.
+          </p>
+          <div class="pair">
+          <figure>
+            <button class="zoom" data-image="assets/Det2Main.png" aria-label="Agrandir : Déterminants 2×2×2 - Profil principal">
+              <img src="assets/Det2Main.png" alt="Déterminants 2×2×2 - Profil principal" loading="lazy">
+            </button>
+            <figcaption>Déterminants 2×2×2 - Profil principal</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom" data-image="assets/Det2second.png" aria-label="Agrandir : Déterminants 2×2×2 - Profil secondaire">
+              <img src="assets/Det2second.png" alt="Déterminants 2×2×2 - Profil secondaire" loading="lazy">
+            </button>
+            <figcaption>Déterminants 2×2×2 - Profil secondaire</figcaption>
+          </figure>
+          </div>
+          <div class="pair">
+          <figure>
+            <button class="zoom" data-image="assets/Angle_main.png" aria-label="Agrandir : Angles des cellules - Profil principal">
+              <img src="assets/Angle_main.png" alt="Angles des cellules - Profil principal" loading="lazy">
+            </button>
+            <figcaption>Angles des cellules - Profil principal</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom" data-image="assets/Angle_second.png" aria-label="Agrandir : Angles des cellules - Profil secondaire">
+              <img src="assets/Angle_second.png" alt="Angles des cellules - Profil secondaire" loading="lazy">
+            </button>
+            <figcaption>Angles des cellules - Profil secondaire</figcaption>
+          </figure>
+          </div>
+        </details>
       </section>
       <!-- SECTION : Modélisation de la turbine par disque d’action -->
       <section class="project-section">
@@ -146,8 +189,14 @@
           <figcaption>Diffuseur avec disque d’action - Sillage de la turbine</figcaption>
         </figure>
         <p>
-          Le modèle avec disque d’action donne une puissance extraite d’environ 23,6 kW, soit un
-          coefficient de puissance de 0,87 rapporté à la surface du rotor et à la vitesse amont.
+          Le modèle avec disque d’action donne une puissance extraite estimée à 23,6 kW, soit un
+          coefficient de puissance d’environ 0,87 rapporté à la surface du rotor et à la vitesse amont.
+        </p>
+        <p>
+          Cette valeur dépasse la limite de Betz de 16/27, soit environ 0,593, applicable à une
+          turbine idéale isolée sans diffuseur. Le diffuseur augmente le débit traversant le rotor,
+          ce qui permet de dépasser cette valeur lorsque le coefficient de puissance est rapporté
+          à la seule surface du rotor.
         </p>
       </section>
     </main>
