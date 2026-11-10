@@ -18,6 +18,20 @@ summary{font-weight:400}
 .project-section{margin:0 0 42px}.project-section h2{margin-top:0}.project-section p{margin:16px 0}.project-section figure{margin:26px auto;max-width:850px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.pair figure{margin:15px 0;width:100%}.pair img{width:100%;aspect-ratio:1.54;object-fit:contain}.equation{overflow-x:auto;padding:12px 0;font-family:Georgia,serif;font-size:20px}.technical{color:#536773;font-size:15px}.geometry{max-width:670px!important}footer{border-top:1px solid #dce4e8}@media(max-width:720px){.pair{grid-template-columns:1fr}.project-section{margin-bottom:32px}}
 
 /* Navigation vers la page principale */
+/* Graphes de qualité : deux colonnes, même dans le lecteur intégré */
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+  max-width: 850px;
+  margin: 20px auto;
+}
+.project-section .quality-grid figure { margin: 0; min-width: 0; }
+.quality-grid img { width: 100%; height: auto; }
+.quality-grid figcaption { margin-top: 6px; }
+@media (max-width: 480px) {
+  .quality-grid { grid-template-columns: 1fr; }
+}
 .back-home { font-size: 14px; text-underline-offset: 4px; }
 .top { gap: 20px; }
 footer .back-home { margin-left: 0; }

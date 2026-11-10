@@ -69,6 +69,10 @@
           domaine mesure 27 m × 7,5 m. Le maillage non structuré est raffiné près des profils, avec
           des couches d’inflation au voisinage des parois.
         </p>
+        <p>
+          Près des parois, 17 couches de cellules sont utilisées, avec une première hauteur de
+          0,1 mm et un taux de croissance de 1,2 pour affiner la résolution de la couche limite.
+        </p>
         <div class="pair">
           <figure>
             <button class="zoom" data-image="assets/finalMeshTotal.png" aria-label="Agrandir : Maillage non structuré - Vue d’ensemble du domaine">
@@ -134,16 +138,15 @@
           conserver des tailles de cellules proches dans les zones d’interpolation.
         </p>
         <p>Le maillage non structuré a été conservé pour la suite de l’étude avec la turbine.</p>
+        <p>
+          Les maillages overset présentent un angle minimal de 34° et un déterminant 2×2×2 minimal de 0,82.
+          Le y<sup>+</sup> reste inférieur à 1 sur la majorité des profils, avec des pics localisés
+          proches de 2,4.
+        </p>
         <!-- Qualité du maillage overset : angles et déterminants des cellules -->
         <details>
           <summary>Qualité du maillage overset</summary>
-          <p>
-            Les angles des cellules restent supérieurs à 34° et les déterminants 2×2×2
-            supérieurs à 0,82. Ces critères complètent le contrôle de la résolution près des parois.
-            Le y<sup>+</sup> a été vérifié : il reste inférieur à 2 sur la quasi-totalité
-            des profils, avec quelques pics très localisés autour de 2,3 à 2,4 au bord de fuite.
-          </p>
-          <div class="pair">
+          <div class="quality-grid">
           <figure>
             <button class="zoom" data-image="assets/Det2Main.png" aria-label="Agrandir : Déterminants 2×2×2 - Profil principal">
               <img src="assets/Det2Main.png" alt="Déterminants 2×2×2 - Profil principal" loading="lazy">
@@ -156,8 +159,6 @@
             </button>
             <figcaption>Déterminants 2×2×2 - Profil secondaire</figcaption>
           </figure>
-          </div>
-          <div class="pair">
           <figure>
             <button class="zoom" data-image="assets/Angle_main.png" aria-label="Agrandir : Angles des cellules - Profil principal">
               <img src="assets/Angle_main.png" alt="Angles des cellules - Profil principal" loading="lazy">
@@ -170,6 +171,20 @@
             </button>
             <figcaption>Angles des cellules - Profil secondaire</figcaption>
           </figure>
+          </div>
+          <div class="quality-grid">
+            <figure>
+              <button class="zoom" data-image="assets/yplus-main.png" aria-label="Agrandir : y plus sur le profil principal">
+                <img src="assets/yplus-main.png" alt="Évolution du y plus le long du profil principal" loading="lazy">
+              </button>
+              <figcaption>y<sup>+</sup> sur le profil principal</figcaption>
+            </figure>
+            <figure>
+              <button class="zoom" data-image="assets/yplus-second.png" aria-label="Agrandir : y plus sur le profil secondaire">
+                <img src="assets/yplus-second.png" alt="Évolution du y plus le long du profil secondaire" loading="lazy">
+              </button>
+              <figcaption>y<sup>+</sup> sur le profil secondaire</figcaption>
+            </figure>
           </div>
         </details>
       </section>
@@ -193,10 +208,9 @@
           coefficient de puissance d’environ 0,87 rapporté à la surface du rotor et à la vitesse amont.
         </p>
         <p>
-          Cette valeur dépasse la limite de Betz de 16/27, soit environ 0,593, applicable à une
-          turbine idéale isolée sans diffuseur. Le diffuseur augmente le débit traversant le rotor,
-          ce qui permet de dépasser cette valeur lorsque le coefficient de puissance est rapporté
-          à la seule surface du rotor.
+          Ce coefficient, rapporté à la surface du rotor, dépasse la limite de Betz
+          (16/27 ≈ 0,593) d’une turbine idéale sans diffuseur. Le diffuseur augmente le débit
+          traversant le rotor et permet ainsi d’extraire davantage de puissance à surface de rotor égale.
         </p>
       </section>
     </main>
